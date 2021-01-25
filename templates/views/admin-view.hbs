@@ -3,24 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./css/style.css" rel="stylesheet">
+    <link href="./css/style-admin-view.css" rel="stylesheet">
     <title>Admin View</title>
 </head>
-<body>
+<body class="adminView">
     <div class="all-elemts">
-        <div>
-            <form action="">
-                <label for="city">City Name</label>
-                <label for="cityCode">City Code</label>
-                <label for="date">Date</label>
-                <label for="firstDose">First Dose</label>
-                <label for="secoundDose">Secound Dose</label>
-                <input type="text">
-                <input type="text">
-                <input type="text">
-                <input type="text">
-                <input type="text">
-            </form>
+        <div class="vaccinDiv">
+            <h1>
+                התחסנות לפי ישוב ותאריך
+            </h1>
+            <div class="addNewInfo">
+                <h1>הוספת מידע חדש</h1>
+                <form action="" class="vaccinForm vaccinFormNewInfo">
+                    <label for="city" class="formTitle">ישוב</label>
+                    <label for="cityCode" class="formTitle">קוד ישוב</label>
+                    <label for="date" class="formTitle">תאריך</label>
+                    <label for="firstDose" class="formTitle">מתחסנים מנה ראשונה</label>
+                    <label for="secoundDose" class="formTitle">מתחסנים מנה שניה</label>
+
+                    <input type="text" id="newCity">
+                    <input type="text" id="newCode">
+                    <input type="text" id="newDate">
+                    <input type="text" id="newDose1">
+                    <input type="text" id="newDose2">
+                </form>
+                <div class="divButton">
+                    <button id="addInfoButton">הוספה</button>
+                </div>
+            </div>
+            <div class="editInfo">
+                <h1>עריכת מידע קיים</h1>
+                <form action="" class="vaccinForm vaccinFormEditInfo">
+                    <label for="city" class="formTitle">ישוב</label>
+                    <label for="cityCode" class="formTitle">קוד ישוב</label>
+                    <label for="date" class="formTitle">תאריך</label>
+                    <label for="firstDose" class="formTitle">מתחסנים מנה ראשונה</label>
+                    <label for="secoundDose" class="formTitle">מתחסנים מנה שניה</label>
+    
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                    <input type="text">
+                </form>
+                <div class="divButton">
+                    <button id="editInfoButton">שמירה</button>
+                </div>
+            </div>
+            
+            
         </div>
     </div>
+    <script src="./js/app.js"></script>
 </body>
 </html>

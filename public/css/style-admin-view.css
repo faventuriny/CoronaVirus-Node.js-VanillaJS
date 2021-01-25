@@ -1,0 +1,44 @@
+.vaccinDiv {
+    background-color: white;
+    width: auto;
+    margin: 50px;
+    padding: 40px;
+    border-radius: 10px;
+    height: 400px;
+    overflow-y: auto;
+    box-shadow: 2px 2px 4px #888888;
+}
+.vaccinDiv h1 {
+    font-size: 2.3em;
+    color: var(--dark-green);
+}
+.addNewInfo h1,
+.editInfo h1 {
+    font-size: 1.5em;
+    color: black;
+}
+.vaccinForm{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr ;
+}
+
+.vaccinForm label{
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.2em;
+
+}
+.divButton{
+    direction: ltr;
+}
+.divButton button{
+    margin: 25px;
+    width: 80px;
+    height: 40px;
+    font-size: 1.2em;
+    background-color: var(--dark-green);
+    border: 1px solid var(--dark-green);
+    color: white;
+    border-radius: 10px;
+    box-shadow: 4px 4px 8px #888888;
+}
