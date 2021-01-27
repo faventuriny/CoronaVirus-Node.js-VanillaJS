@@ -16,40 +16,52 @@
             <div class="addNewInfo">
                 <h1>הוספת מידע חדש</h1>
                 <form action="" class="vaccinForm vaccinFormNewInfo">
-                    <label for="city" class="formTitle">ישוב</label>
-                    <label for="cityCode" class="formTitle">קוד ישוב</label>
-                    <label for="date" class="formTitle">תאריך</label>
-                    <label for="firstDose" class="formTitle">מתחסנים מנה ראשונה</label>
-                    <label for="secoundDose" class="formTitle">מתחסנים מנה שניה</label>
+                    <div class="grid">
+                        <label for="city" class="formTitle">ישוב</label>
+                        <label for="cityCode" class="formTitle">קוד ישוב</label>
+                        <label for="date" class="formTitle">תאריך</label>
+                        <label for="firstDose" class="formTitle">מתחסנים מנה ראשונה</label>
+                        <label for="secoundDose" class="formTitle">מתחסנים מנה שניה</label>
 
-                    <input type="text" id="newCity">
-                    <input type="text" id="newCode">
-                    <input type="text" id="newDate">
-                    <input type="text" id="newDose1">
-                    <input type="text" id="newDose2">
+                        <input type="text" id="newCity">
+                        <input type="text" id="newCode">
+                        <input type="text" id="newDate">
+                        <input type="text" id="newDose1">
+                        <input type="text" id="newDose2">
+                    </div>
+                    <div class="divButton">
+                        <button id="addInfoButton">הוספה</button>
+                    </div>
                 </form>
-                <div class="divButton">
-                    <button id="addInfoButton">הוספה</button>
-                </div>
+                
             </div>
             <div class="editInfo">
                 <h1>עריכת מידע קיים</h1>
-                <form action="" class="vaccinForm vaccinFormEditInfo">
-                    <label for="city" class="formTitle">ישוב</label>
-                    <label for="cityCode" class="formTitle">קוד ישוב</label>
-                    <label for="date" class="formTitle">תאריך</label>
-                    <label for="firstDose" class="formTitle">מתחסנים מנה ראשונה</label>
-                    <label for="secoundDose" class="formTitle">מתחסנים מנה שניה</label>
-    
-                    <input type="text">
-                    <input type="text">
-                    <input type="text">
-                    <input type="text">
-                    <input type="text">
+                <form action="" class="searchForm">
+                    <input type="text" id="searchCity" placeholder="שם העיר">
+                    <input type="text" id="searchDate" placeholder="תאריך">
+                    <button id="searchButton">חיפוש</button>
                 </form>
-                <div class="divButton">
-                    <button id="editInfoButton">שמירה</button>
-                </div>
+                <div id="editCityDateInfoDiv"></div>
+
+                {{!-- <form action="" class="vaccinForm vaccinFormEditInfo">
+                    <div class="grid">
+                        <label for="city" class="formTitle">ישוב</label>
+                        <label for="cityCode" class="formTitle">קוד ישוב</label>
+                        <label for="date" class="formTitle">תאריך</label>
+                        <label for="firstDose" class="formTitle">מתחסנים מנה ראשונה</label>
+                        <label for="secoundDose" class="formTitle">מתחסנים מנה שניה</label>
+        
+                        <input type="text">
+                        <input type="text">
+                        <input type="text">
+                        <input type="text">
+                        <input type="text">
+                    </div>
+                    <div class="divButton">
+                        <button id="editInfoButton">שמירה</button>
+                    </div>
+                </form> --}}
             </div>
             
             

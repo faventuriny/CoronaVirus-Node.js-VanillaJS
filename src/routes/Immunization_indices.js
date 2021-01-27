@@ -2,72 +2,107 @@ const express = require('express')
 const ImmunizationIndices = require('../models/immunization_indices')
 const router = new express.Router()
 
+// post new data
 router.post('/immunization-indices', async (req, res) => {
-    const immunizationIndices = new ImmunizationIndices(req.body)
+    const data = new ImmunizationIndices(req.body)
     
     try {
-        await immunizationIndices.save()
-        res.status(201).send({ immunizationIndices })
+        await data.save()
+        res.status(201).send({ immunizationIndices: data })
     } catch (e) {
         res.status(400).send(e)
     }
 })
 
+// get all data
 router.get('/immunization-indices', async (req, res) => {
-    ImmunizationIndices.find({}, (err, immunizationIndices)=>{
+    ImmunizationIndices.find({}, (err, data)=>{
         if (err) {
             console.log(err);
           } else {
-            res.json(immunizationIndices);
+            res.json(data);
           }
     })
 })
 
+// get all data on specific city
 router.get('/immunization-indices/city/:cityCode', async (req, res) => {
-    const immunizationIndicesPerCity = await ImmunizationIndices.find({cityCode: req.params.cityCode })
+    const city = await ImmunizationIndices.find({cityCode: req.params.cityCode })
     
     try{
-        if(!immunizationIndicesPerCity){
+        if(!city){
             res.status(400).send()
         }
-        res.send(immunizationIndicesPerCity)
+        res.send(city)
     } catch (e) {
         res.status(404).send()
     }
 })
 
+// get all data on specific date
 router.get('/immunization-indices/date/:date', async (req, res) => {
-    const immunizationIndicesPerDate = await ImmunizationIndices.find({date: req.params.date })
+    const date = await ImmunizationIndices.find({date: req.params.date })
     
     try{
-        if(!immunizationIndicesPerDate){
+        if(!date){
             res.status(400).send()
         }
-        res.send(immunizationIndicesPerDate)
+        res.send(date)
     } catch (e) {
         res.status(404).send()
     }
 })
 
-// edit 
-// router.patch('/immunization-indices/?city=city&date=date', async (req, res) => {
+// get a specific city and date
+router.get('/immunization-indices/search/:city/:date', async (req, res) => {
+    let city = req.params.city
+    let date = req.params.date
+
+
+    let data = await ImmunizationIndices.find({
+        city: city,
+        date: date 
+    })
     
-//     const updates = Object.keys(req.body)
+    try{
+        if(!data){
+            res.status(400).send()
+        }
+        res.send(data)
+    } catch (e) {
+        res.status(404).send()
+    }
+})
+// edit 
+router.patch('/immunization-indices/edit', async (req, res) => {
+    
+    // const updates = Object.keys(req.body)
 
-//     try {
-//         const book = await Book.findOne({_id: req.params.id})
-//         if(!book){
-//             return res.status(404).send()
-//         }
+    try {
+        let data = await ImmunizationIndices.findOne({
+            city: req.body.city,
+            date: req.body.date 
+        })
 
-//         updates.forEach((update)=> book[update] = req.body[update])
-//         await book.save()
+        if(!data){
+            return res.status(404).send()
+        }
 
-//         res.send(book)
-//     } catch (e) {
-//         res.status(400).send(e)
-//     }
-// })
+        // updates.forEach((update)=> data[update] = req.body[update])
+
+        data.city = req.body.city
+        data.cityCode = req.body.cityCode
+        data.date = req.body.date
+        data.firstDose = req.body.firstDose
+        data.secoundDose = req.body.secoundDose
+
+        await data.save()
+
+        res.send(data)
+    } catch (e) {
+        res.status(400).send(e)
+    }
+})
   
 
 // router.delete('/books/:id', async (req, res) => {

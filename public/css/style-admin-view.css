@@ -4,8 +4,6 @@
     margin: 50px;
     padding: 40px;
     border-radius: 10px;
-    height: 400px;
-    overflow-y: auto;
     box-shadow: 2px 2px 4px #888888;
 }
 .vaccinDiv h1 {
@@ -17,7 +15,7 @@
     font-size: 1.5em;
     color: black;
 }
-.vaccinForm{
+.grid{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr ;
 }
@@ -28,10 +26,14 @@
     font-size: 1.2em;
 
 }
+input{
+    padding: 5px;
+}
 .divButton{
     direction: ltr;
 }
-.divButton button{
+.divButton button,
+#searchButton{
     margin: 25px;
     width: 80px;
     height: 40px;
