@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const immunizationIndicesSchema = new mongoose.Schema({
+const vaccineIndicesSchema = new mongoose.Schema({
     city: {
         type: String,
         required: true
@@ -27,6 +27,6 @@ const immunizationIndicesSchema = new mongoose.Schema({
 })
 
 
-const ImmunizationIndices = mongoose.model('ImmunizationIndices', immunizationIndicesSchema)
+const vaccineIndices = mongoose.model('vaccineIndices', vaccineIndicesSchema)
 
-module.exports = ImmunizationIndices
+module.exports = vaccineIndices

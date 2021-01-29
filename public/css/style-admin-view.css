@@ -10,8 +10,8 @@
     font-size: 2.3em;
     color: var(--dark-green);
 }
-.addNewInfo h1,
-.editInfo h1 {
+.vaccinDiv .addNewInfo h1,
+.vaccinDiv .editInfo h1 {
     font-size: 1.5em;
     color: black;
 }
@@ -33,7 +33,8 @@ input{
     direction: ltr;
 }
 .divButton button,
-#searchButton{
+#searchButton,
+#searchButtonInfected{
     margin: 25px;
     width: 80px;
     height: 40px;
@@ -43,4 +44,11 @@ input{
     color: white;
     border-radius: 10px;
     box-shadow: 4px 4px 8px #888888;
+}
+.infected{
+    margin-bottom: 20px;
+}
+.infectedButt{
+    direction: rtl;
+    margin-right: 50%;
 }

@@ -1,22 +1,22 @@
 const express = require('express')
-const ImmunizationIndices = require('../models/immunization_indices')
+const VaccineIndices = require('../models/vaccine_indices')
 const router = new express.Router()
 
 // post new data
-router.post('/immunization-indices', async (req, res) => {
-    const data = new ImmunizationIndices(req.body)
+router.post('/vaccine-indices', async (req, res) => {
+    const data = new VaccineIndices(req.body)
     
     try {
         await data.save()
-        res.status(201).send({ immunizationIndices: data })
+        res.status(201).send({ vaccineIndices: data })
     } catch (e) {
         res.status(400).send(e)
     }
 })
 
 // get all data
-router.get('/immunization-indices', async (req, res) => {
-    ImmunizationIndices.find({}, (err, data)=>{
+router.get('/vaccine-indices', async (req, res) => {
+    VaccineIndices.find({}, (err, data)=>{
         if (err) {
             console.log(err);
           } else {
@@ -26,8 +26,8 @@ router.get('/immunization-indices', async (req, res) => {
 })
 
 // get all data on specific city
-router.get('/immunization-indices/city/:cityCode', async (req, res) => {
-    const city = await ImmunizationIndices.find({cityCode: req.params.cityCode })
+router.get('/vaccine-indices/city/:cityCode', async (req, res) => {
+    const city = await VaccineIndices.find({cityCode: req.params.cityCode })
     
     try{
         if(!city){
@@ -40,8 +40,8 @@ router.get('/immunization-indices/city/:cityCode', async (req, res) => {
 })
 
 // get all data on specific date
-router.get('/immunization-indices/date/:date', async (req, res) => {
-    const date = await ImmunizationIndices.find({date: req.params.date })
+router.get('/vaccine-indices/date/:date', async (req, res) => {
+    const date = await VaccineIndices.find({date: req.params.date })
     
     try{
         if(!date){
@@ -54,12 +54,12 @@ router.get('/immunization-indices/date/:date', async (req, res) => {
 })
 
 // get a specific city and date
-router.get('/immunization-indices/search/:city/:date', async (req, res) => {
+router.get('/vaccine-indices/search/:city/:date', async (req, res) => {
     let city = req.params.city
     let date = req.params.date
 
 
-    let data = await ImmunizationIndices.find({
+    let data = await VaccineIndices.find({
         city: city,
         date: date 
     })
@@ -74,12 +74,12 @@ router.get('/immunization-indices/search/:city/:date', async (req, res) => {
     }
 })
 // edit 
-router.patch('/immunization-indices/edit', async (req, res) => {
+router.patch('/vaccine-indices/edit', async (req, res) => {
     
     // const updates = Object.keys(req.body)
 
     try {
-        let data = await ImmunizationIndices.findOne({
+        let data = await VaccineIndices.findOne({
             city: req.body.city,
             date: req.body.date 
         })
@@ -87,8 +87,6 @@ router.patch('/immunization-indices/edit', async (req, res) => {
         if(!data){
             return res.status(404).send()
         }
-
-        // updates.forEach((update)=> data[update] = req.body[update])
 
         data.city = req.body.city
         data.cityCode = req.body.cityCode

@@ -1,7 +1,7 @@
 const express = require('express') 
 require('./db/mongoose')
-const immunizationIndicesRouter = require('./routes/Immunization_indices')
-//const bookRouter = require('./routes/book')
+const vaccineIndicesRouter = require('./routes/vaccine_indices')
+const infectedAndDeceased = require('./routes/infected_and_deceased')
 const path = require('path')
 const hbs = require('hbs')
 const app = express()
@@ -32,8 +32,8 @@ app.get('/admin-view',(req, res) => {
 })
 
 app.use(express.json())
-app.use(immunizationIndicesRouter)
-//app.use(bookRouter)
+app.use(vaccineIndicesRouter)
+app.use(infectedAndDeceased)
 
 
 module.exports = app
