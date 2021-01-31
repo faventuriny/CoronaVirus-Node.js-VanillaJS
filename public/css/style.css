@@ -14,3 +14,31 @@ body {
     background-color: var(--background-color);
     direction: rtl;
 }
+.general{
+    padding: 35px;
+    background-color: var(--background-color);
+}
+.general div{
+    background-color: var(--background-color);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-radius: 10px;
+}
+.general div div {
+    background-color: white;
+}
+.section1 div{
+    width: 15vw;
+    height: 12vw;
+}
+.section2 div{
+    height: 28vw;
+    width: 100%;
+    margin-top: 1.3vw;
+}
+.section3 {
+    height: 23vw;
+    width: 100%;
+    margin-top: 1.3vw;
+}
