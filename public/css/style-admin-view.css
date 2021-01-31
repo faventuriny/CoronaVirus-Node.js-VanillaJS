@@ -10,6 +10,13 @@
     font-size: 2.3em;
     color: var(--dark-green);
 }
+.addNewInfo, 
+.editInfo{
+    background-color: var(--background-color);
+    padding: 25px;
+    margin-top: 25px;
+    border-radius: 10px;
+}
 .vaccinDiv .addNewInfo h1,
 .vaccinDiv .editInfo h1 {
     font-size: 1.5em;
@@ -31,11 +38,13 @@ input{
 }
 .divButton{
     direction: ltr;
+    margin-top: 25px;
 }
 .divButton button,
 #searchButton,
-#searchButtonInfected{
-    margin: 25px;
+#searchButtonInfected,
+#editInfoInfectedButton {
+    /* margin: 25px; */
     width: 80px;
     height: 40px;
     font-size: 1.2em;
@@ -45,10 +54,30 @@ input{
     border-radius: 10px;
     box-shadow: 4px 4px 8px #888888;
 }
+#searchButton,
+#searchButtonInfected {
+    margin-right: 25px;
+}
+#editCityDateInfoDiv{
+    margin-top: 25px;
+}
 .infected{
     margin-bottom: 20px;
 }
 .infectedButt{
     direction: rtl;
-    margin-right: 50%;
+    /* margin-right: 50%; */
+}
+#editInfoInfected{
+    margin-top: 25px;
+}
+#editInfoInfected label,
+#editInfoInfected input {
+    margin-left: 10px;
+}
+#editInfoInfected input{
+    direction: ltr;
+}
+.notDisplay{
+    display: none;
 }

@@ -15,7 +15,7 @@ const infectedAndDeceasedSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    totalInfected: {
+    totalInfecteds: {
         type: Number,
         required: true
     },

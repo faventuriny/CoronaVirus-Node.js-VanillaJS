@@ -161,6 +161,7 @@ function setVaccinTable(jsonObj) {
     buttonDiv.appendChild(button) 
 
     addEventListenerToEditButton()
+    document.querySelector('#searchButton').classList.toggle('notDisplay')
 }
 
 // admin page - event listener to submit new infected and decease info
@@ -174,6 +175,7 @@ function addEventListenerToAddInfoButtonInfected() {
 
         let addInfecteds = document.querySelector('#addInfecteds').value
         let addInfectedsFromMidNight = document.querySelector('#addInfectedsFromMidNight').value
+        let totalInfecteds = document.querySelector('#addTotalInfecteds').value
 
         let addActivePatients = document.querySelector('#addActivePatients').value
         let addActivePatientsFromMidNight = document.querySelector('#addActivePatientsFromMidNight').value
@@ -196,6 +198,7 @@ function addEventListenerToAddInfoButtonInfected() {
 
             newInfecteds: addInfecteds,
             newInfectedsFromMidNight: addInfectedsFromMidNight,
+            totalInfecteds: totalInfecteds,
 
             activePatients: addActivePatients,
             activePatientsFromMidNight: addActivePatientsFromMidNight,
@@ -255,6 +258,15 @@ function addEventListenerToSearchDateButton() {
 }
 function setInfectedTable(jsonObj) {
     let editInfoInfectedDiv = document.querySelector('#editInfoInfected')
+    
+    if(jsonObj.length === 0 ){
+        let p = document.createElement('p')
+        p.innerHTML = 'אין מידע על התאריך הזה'
+        p.id = 'noResultP'
+        editInfoInfectedDiv.appendChild(p)
+        return
+    }
+
     let list1 = [['newInfecteds', 'newInfectedsFromMidNight', 'totalInfecteds'],
                 ['activePatients','activePatientsFromMidNight','activePatientsAtHoma', 'activePatientsAtHotel', 'activePatientsAtHospital'],
                 ['seriouslyIll','seriouslyIllFromMidNight','criticalIll','respiratoryPatients'],
@@ -262,9 +274,9 @@ function setInfectedTable(jsonObj) {
                 ['positiveLabTests', 'totalLabTest']]
 
     let list2 = [['מאומתים חדשים','מאומתים חדשים מחצות','סה"כ מאומתים'],
-                ['חולים פעילים','חולים פעילים מחצות','חולים בבית','חולים במלון','חולים בי"ח']
-                ['חולים קשים','חולים קשים מחצות','חולים קריטים','חולים מונשמים']
-                ['נפטרים']
+                ['חולים פעילים','חולים פעילים מחצות','חולים בבית','חולים במלון','חולים בי"ח'],
+                ['חולים קשים','חולים קשים מחצות','חולים קריטים','חולים מונשמים'],
+                ['נפטרים'],
                 ['אחוז בדיקות חיוביות','בדיקות מאתמול']]
 
     for(let i = 0 ; i < list1.length ; i++){
@@ -274,74 +286,70 @@ function setInfectedTable(jsonObj) {
 
         for(let j = 0 ; j < list1[i].length ; j++){
             let label = document.createElement('label')
-            label.textContent = list2[i][j]
+            label.textContent = list2[i][j] + ':'
             div.appendChild(label)
 
             let input = document.createElement('input')
             input.value = jsonObj[0][list1[i][j]]
             input.id = list1[i][j]
+            input.size = input.value.length
             div.appendChild(input)
         }
-       
     }
 
+    let divButton = document.createElement('div')
+    divButton.classList.add('infectedDivButton')
+    editInfoInfectedDiv.appendChild(divButton)
 
+    let button = document.createElement('button')
+    button.id = 'editInfoInfectedButton'
+    button.textContent = 'ערוך'
+    divButton.appendChild(button)
 
-    // // div 1 
-    // let div1 = document.createElement('div')
-    // div1.classList.add('infected')
-    // editInfoInfectedDiv.appendChild(div1)
-
-    // let newInfectedsLabel = document.createElement('label')
-    // newInfectedsLabel.textContent = 'מאומתים חדשים'
-    // div1.appendChild(newInfectedsLabel)
-
-    // let newInfectedsInput = document.createElement('input')
-    // newInfectedsInput.value = jsonObj[0].newInfecteds
-    // newInfectedsInput.id = 'editDateInfected'
-    // div1.appendChild(newInfectedsInput)
-
-    // let newInfectedsFromMidNightLabel = document.createElement('label')
-    // newInfectedsFromMidNightLabel.textContent = 'מאומתים חדשים מחצות'
-    // div1.appendChild(newInfectedsFromMidNightLabel)
-
-    // let newInfectedsFromMidNightInput = document.createElement('input')
-    // newInfectedsFromMidNightInput.value = jsonObj[0].newInfectedsFromMidNight
-    // newInfectedsFromMidNightInput.id = 'editnewInfectedsFromMidNight'
-    // div1.appendChild(newInfectedsFromMidNightInput)
-
-    // // div 2 
-
-    // let div2 = document.createElement('div')
-    // div2.classList.add('infected')
-    // editInfoInfectedDiv.appendChild(div2)
-
-    // let activePatientsLabel = document.createElement('label')
-    // activePatientsLabel.textContent = 'חולים פעילים '
-    // div2.appendChild(activePatientsLabel)
-
-    // let activePatients = document.createElement('input')
-    // activePatients.value = jsonObj[0].activePatients
-    // activePatients.id = 'activePatients'
-    // div2.appendChild(activePatients)
-
-    // let activePatientsFromMidNightLabel = document.createElement('label')
-    // activePatientsFromMidNightLabel.textContent = 'חולים פעילים מחצות'
-    // div2.appendChild(activePatientsFromMidNightLabel)
-
-    // let activePatientsFromMidNight = document.createElement('input')
-    // activePatientsFromMidNight.value = jsonObj[0].activePatientsFromMidNight
-    // activePatientsFromMidNight.id = 'activePatientsFromMidNight'
-    // div2.appendChild(activePatientsFromMidNight)
-
-
-
-    
-
-
-
-
+    addEventListenerToEditButtonInfected()
+    document.querySelector('#searchButtonInfected').classList.toggle('notDisplay')
+    document.querySelector('#noResultP').classList.toggle('notDisplay')
 }
+// admin page - edit infected info
+function addEventListenerToEditButtonInfected() {
+    document.querySelector('#editInfoInfectedButton').addEventListener('click', (e) => {
+        e.preventDefault()
+        
+        let keys = ['newInfecteds', 'newInfectedsFromMidNight', 'totalInfecteds', 'activePatients', 'activePatientsFromMidNight', 'activePatientsAtHoma','activePatientsAtHotel', 'activePatientsAtHospital','seriouslyIll', 'seriouslyIllFromMidNight','criticalIll','respiratoryPatients', 'deceased', 'positiveLabTests', 'totalLabTest']
+        let date = document.querySelector('#searchDateInfected').value
+
+        let data = {date: date}
+        for(let i = 0 ; i < keys.length ; i++){
+            data[keys[i]] = document.querySelector('#' + keys[i]).value
+        }
+        console.log('data', data);
+
+        let dataStr = JSON.stringify(data);
+        
+        let xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+
+        xhr.addEventListener("readystatechange", function() {
+        if(this.readyState === 4) {
+            console.log(this.responseText);
+            let jsonData = JSON.parse(this.responseText)
+            if(jsonData._id){
+                alert('The details have been updated!')
+                window.location.href = "/admin-view"
+            } else {
+                alert('opsss! something want wrong :( Please try again')
+            }
+        }
+        });
+
+        xhr.open("PATCH", "/infected-and-deceased/edit");
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.send(dataStr);
+    })
+}
+
+
 
 if(document.querySelector('.adminView')!== null){
     window.onload = (e) => {
