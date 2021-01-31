@@ -131,6 +131,38 @@
                 <div id="editCityTrafficInfoDiv" class="gridTraffic"></div>
             </div>
         </div>
+        <div class="vaccinDiv">
+            <h1>
+                סטאטוס בתי חולים
+            </h1>
+            <div class="addNewInfo">
+                <h1>הוספת מידע חדש</h1>
+                <form action="" class="vaccinForm vaccinFormNewInfo">
+                    <div class="gridHospital">
+                        <label for="hospital" class="formTitle">בית חולים</label>
+                        <label for="occupancy" class="formTitle">% תפוסה כללי</label>
+                        <label for="coronaOccupancy" class="formTitle">% תפוסת קורונה</label>
+                        <label for="staffInIsolation" class="formTitle">אנשי צוות מאומתים ובבידוד</label>
+
+                        <input type="text" id="hospitalName">
+                        <input type="text" id="occupancy">
+                        <input type="text" id="coronaOccupancy">
+                        <input type="text" id="staffInIsolation">
+                    </div>
+                    <div class="divButton">
+                        <button id="addInfoButtonHospital">הוספה</button>
+                    </div>
+                </form>
+            </div>
+            <div class="editInfo">
+                <h1>עריכת מידע קיים</h1>
+                <form action="" class="searchForm">
+                    <input type="text" id="searchHospital" placeholder="שם בית החולים">
+                    <button id="searchButtonHospital">חיפוש</button>
+                </form>
+                <div id="editHospitalInfoDiv" class="gridHospital"></div>
+            </div>
+        </div>
         
     </div>
     <script src="./js/app.js"></script>

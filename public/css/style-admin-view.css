@@ -46,7 +46,9 @@ input{
 #searchButtonInfected,
 #editInfoInfectedButton,
 #searchButtonTraffic,
-#editInfoTrafficButton {
+#editInfoTrafficButton,
+#searchButtonHospital,
+#editInfoHospitalButton {
     /* margin: 25px; */
     width: 80px;
     height: 40px;
@@ -59,12 +61,14 @@ input{
 }
 #searchButton,
 #searchButtonInfected,
-#searchButtonTraffic {
+#searchButtonTraffic,
+#searchButtonHospital {
     margin-right: 25px;
 }
 #editCityDateInfoDiv,
 #editCityTrafficInfoDiv,
-#editInfoTrafficButton{
+#editInfoTrafficButton,
+#editInfoHospitalButton{
     margin-top: 25px;
 }
 .infected{
@@ -90,4 +94,8 @@ input{
 .gridTraffic{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+.gridHospital{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
 }

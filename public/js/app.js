@@ -259,7 +259,7 @@ function setInfectedTable(jsonObj) {
     
     if(jsonObj.length === 0 ){
         let p = document.createElement('p')
-        p.innerHTML = 'אין מידע על התאריך הזה'
+        p.innerHTML = 'אין מידע על העיר הזה'
         p.id = 'noResultP'
         editInfoInfectedDiv.appendChild(p)
         return
@@ -490,6 +490,143 @@ function addEventListenerToEditButtonTraffic() {
     })
 }
 
+// admin page - hospital status - event listener to submit new city
+function addEventListenerToAddInfoButtonHospital() {
+    let button = document.querySelector('#addInfoButtonHospital')
+    button.addEventListener('click', (e)=>{
+        e.preventDefault()
+        console.log('submit!');
+
+        let hospitalName = document.querySelector('#hospitalName').value
+        let occupancy = document.querySelector('#occupancy').value
+        let coronaOccupancy = document.querySelector('#coronaOccupancy').value
+        let staffInIsolation = document.querySelector('#staffInIsolation').value
+
+        let data = JSON.stringify({
+            "hospitalName": hospitalName,
+            "occupancy": occupancy,
+            "coronaOccupancy":coronaOccupancy,
+            "staffInIsolation": staffInIsolation
+        })
+        console.log(data);
+
+        let xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+
+        xhr.addEventListener("readystatechange", function() {
+        if(this.readyState === 4) {
+            console.log(this.responseText);
+            let jsonData = JSON.parse(this.responseText)
+            console.log(jsonData);
+            
+            if(jsonData.data){
+                alert('Your details have been successfully uploaded!')
+                window.location.href = "/admin-view"
+            } else {
+                alert('opsss! something want wrong :( Please try to upload again')
+            }
+        }
+        });
+
+        xhr.open("POST", "/hospital-status");
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.send(data);
+    })
+}
+// admin page - hospital status - searching for a city 
+function addEventListenerToSearchButtonHospital() {
+    document.querySelector('#searchButtonHospital').addEventListener('click', (e) => {
+        e.preventDefault()
+        let hospitalName = document.querySelector('#searchHospital').value
+
+        fetch(`/hospital-status/search/${hospitalName}`)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            setHospitalTable(data)
+        });
+    }) 
+}
+// admin page - hospital status - set table
+function setHospitalTable(jsonObj) {
+    let hospitalDiv = document.querySelector('#editHospitalInfoDiv')
+    
+    if(jsonObj.length === 0 ){
+        let p = document.createElement('p')
+        p.innerHTML = 'אין מידע על בית החולים הזה'
+        p.id = 'noResultPHospital'
+        hospitalDiv.appendChild(p)
+        return
+    }
+
+    let labelList = ['אנשי צוות מאומתים ובבידוד','% תפוסת קורונה','% תפוסה כללי','בית חולים']
+    let keysList = ['hospitalName', 'occupancy', 'coronaOccupancy', 'staffInIsolation']
+
+    for(let i = 0 ; i < labelList.length ; i++){
+        let label = document.createElement('label')
+        label.textContent = labelList[i]
+        label.classList.add('formTitle')
+        hospitalDiv.appendChild(label)
+    }
+    for(let i = 0 ; i < keysList.length ; i++){
+        let input = document.createElement('input')
+        input.value = jsonObj[0][keysList[i]]
+        input.id = keysList[i] + 'EditHospital'
+        hospitalDiv.appendChild(input)
+    }
+
+    let divButton = document.createElement('div')
+    divButton.classList.add('hospitalDivButton')
+    hospitalDiv.appendChild(divButton)
+
+    let button = document.createElement('button')
+    button.id = 'editInfoHospitalButton'
+    button.textContent = 'ערוך'
+    divButton.appendChild(button)
+
+    addEventListenerToEditButtonHospital()
+    document.querySelector('#searchButtonHospital').classList.toggle('notDisplay')
+    document.querySelector('#noResultPHospital').classList.toggle('notDisplay')
+}
+// admin page - hospital status - edit infected info
+function addEventListenerToEditButtonHospital() {
+    document.querySelector('#editInfoHospitalButton').addEventListener('click', (e) => {
+        e.preventDefault()
+
+        let keys = ['occupancy', 'coronaOccupancy', 'staffInIsolation']
+        let hospitalName = document.querySelector('#searchHospital').value
+
+        let data = {hospitalName: hospitalName}
+        for(let i = 0 ; i < keys.length ; i++){
+            data[keys[i]] = document.querySelector('#' + keys[i] + 'EditHospital').value
+        }
+        console.log('data', data);
+
+        let dataStr = JSON.stringify(data);
+        
+        let xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+
+        xhr.addEventListener("readystatechange", function() {
+        if(this.readyState === 4) {
+            console.log(this.responseText);
+            let jsonData = JSON.parse(this.responseText)
+            if(jsonData._id){
+                alert('The details have been updated!')
+                window.location.href = "/admin-view"
+            } else {
+                alert('opsss! something want wrong :( Please try again')
+            }
+        }
+        });
+
+        xhr.open("PATCH", "/hospital-status/edit");
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.send(dataStr);
+    })
+}
 
 if(document.querySelector('.adminView')!== null){
     window.onload = (e) => {
@@ -501,5 +638,8 @@ if(document.querySelector('.adminView')!== null){
 
         addEventListenerToAddInfoButtonTraffic()
         addEventListenerToSearchButtonTrafficLightPlan()
+
+        addEventListenerToAddInfoButtonHospital()
+        addEventListenerToSearchButtonHospital()
     }
 }
