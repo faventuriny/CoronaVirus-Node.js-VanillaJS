@@ -44,13 +44,9 @@
                 <div id="editCityDateInfoDiv"></div>
             </div>
         </div>
-
-
-
-
         <div class="vaccinDiv">
             <h1>
-                נתוני חולים ונפטרים
+                נתוני חולים, נפטרים ובדיקות
             </h1>
             <div class="addNewInfo">
                 <h1>הוספת מידע חדש</h1>
@@ -99,6 +95,43 @@
                 <div id="editInfoInfected"></div>
             </div>
         </div>
+        <div class="vaccinDiv">
+            <h1>
+                תוכנית רמזור
+            </h1>
+            <div class="addNewInfo">
+                <h1>הוספת מידע חדש</h1>
+                <form action="" class="vaccinForm vaccinFormNewInfo">
+                    <div class="gridTraffic">
+                        <label for="city" class="formTitle">ישוב</label>
+                        <label for="score" class="formTitle">ציון</label>
+                        <label for="newInfectedsFor10KPeople" class="formTitle">חולים חדשים לכל 10,000 נפש</label>
+                        <label for="positiveTestPercentage" class="formTitle">% הבדיקות החיוביות</label>
+                        <label for="verifiedChangeRate" class="formTitle">שיעור שינוי מאומתים</label>
+                        <label for="activePatients" class="formTitle">חולים פעילים</label>
+
+                        <input type="text" id="cityTraffic">
+                        <input type="text" id="score">
+                        <input type="text" id="newInfectedsFor10KPeople">
+                        <input type="text" id="positiveTestPercentage">
+                        <input type="text" id="verifiedChangeRate">
+                        <input type="text" id="activePatients">
+                    </div>
+                    <div class="divButton">
+                        <button id="addInfoButtonTraffic">הוספה</button>
+                    </div>
+                </form>
+            </div>
+            <div class="editInfo">
+                <h1>עריכת מידע קיים</h1>
+                <form action="" class="searchForm">
+                    <input type="text" id="searchCityTraffic" placeholder="שם העיר">
+                    <button id="searchButtonTraffic">חיפוש</button>
+                </form>
+                <div id="editCityTrafficInfoDiv" class="gridTraffic"></div>
+            </div>
+        </div>
+        
     </div>
     <script src="./js/app.js"></script>
 </body>

@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-let sumOfInfecteds = 0
 
 const infectedAndDeceasedSchema = new mongoose.Schema({
     date: {

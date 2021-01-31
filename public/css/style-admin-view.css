@@ -27,7 +27,8 @@
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr ;
 }
 
-.vaccinForm label{
+.vaccinForm label,
+.formTitle{
     text-align: center;
     font-weight: 700;
     font-size: 1.2em;
@@ -43,7 +44,9 @@ input{
 .divButton button,
 #searchButton,
 #searchButtonInfected,
-#editInfoInfectedButton {
+#editInfoInfectedButton,
+#searchButtonTraffic,
+#editInfoTrafficButton {
     /* margin: 25px; */
     width: 80px;
     height: 40px;
@@ -55,10 +58,13 @@ input{
     box-shadow: 4px 4px 8px #888888;
 }
 #searchButton,
-#searchButtonInfected {
+#searchButtonInfected,
+#searchButtonTraffic {
     margin-right: 25px;
 }
-#editCityDateInfoDiv{
+#editCityDateInfoDiv,
+#editCityTrafficInfoDiv,
+#editInfoTrafficButton{
     margin-top: 25px;
 }
 .infected{
@@ -80,4 +86,8 @@ input{
 }
 .notDisplay{
     display: none;
+}
+.gridTraffic{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 }

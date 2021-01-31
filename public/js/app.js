@@ -1,4 +1,4 @@
-// admin page - event listener to submit new city (vaccine)
+// admin page - vaccin per city - event listener to submit new city (vaccine)
 function addEventListenerToAddInfoButton() {
     let button = document.querySelector('#addInfoButton')
     button.addEventListener('click', (e)=>{
@@ -33,7 +33,6 @@ function addEventListenerToAddInfoButton() {
             } else {
                 alert('opsss! something want wrong :( Please try to upload again')
             }
-            window.location.href = "/admin-view"
         }
         });
 
@@ -43,8 +42,7 @@ function addEventListenerToAddInfoButton() {
         xhr.send(data);
     })
 }
-
-// admin page - searching for a city 
+// admin page - vaccin per city - searching for a city 
 function addEventListenerToSearchButton() {
     document.querySelector('#searchButton').addEventListener('click', (e) => {
         e.preventDefault()
@@ -60,8 +58,7 @@ function addEventListenerToSearchButton() {
     })
     
 }
-
-// admin page - Edit vaccin
+// admin page - vaccin per city - Edit 
 function addEventListenerToEditButton() {
     document.querySelector('#editInfoButton').addEventListener('click', (e) => {
         e.preventDefault()
@@ -94,7 +91,7 @@ function addEventListenerToEditButton() {
     })
     
 }
-
+// admin page - vaccin per city - set table 
 function setVaccinTable(jsonObj) {
     let div = document.querySelector('#editCityDateInfoDiv')
     let form = document.createElement('form')
@@ -164,7 +161,8 @@ function setVaccinTable(jsonObj) {
     document.querySelector('#searchButton').classList.toggle('notDisplay')
 }
 
-// admin page - event listener to submit new infected and decease info
+
+// admin page - infected and deceased - event listener to submit new info
 function addEventListenerToAddInfoButtonInfected() {
     let button = document.querySelector('#addInfoButtonInfected')
     button.addEventListener('click', (e)=>{
@@ -231,7 +229,6 @@ function addEventListenerToAddInfoButtonInfected() {
             } else {
                 alert('opsss! something want wrong :( Please try to upload again')
             }
-            // window.location.href = "/admin-view"
         }
         });
 
@@ -241,7 +238,7 @@ function addEventListenerToAddInfoButtonInfected() {
         xhr.send(data);
     })
 }
-// admin page - searching for a date (infections) 
+// admin page - infected and deceased - searching for a date (infections) 
 function addEventListenerToSearchDateButton() {
     document.querySelector('#searchButtonInfected').addEventListener('click', (e) => {
         e.preventDefault()
@@ -256,6 +253,7 @@ function addEventListenerToSearchDateButton() {
     })
     
 }
+// admin page - infected and deceased - set table
 function setInfectedTable(jsonObj) {
     let editInfoInfectedDiv = document.querySelector('#editInfoInfected')
     
@@ -310,7 +308,7 @@ function setInfectedTable(jsonObj) {
     document.querySelector('#searchButtonInfected').classList.toggle('notDisplay')
     document.querySelector('#noResultP').classList.toggle('notDisplay')
 }
-// admin page - edit infected info
+// admin page - infected and deceased - edit infected info
 function addEventListenerToEditButtonInfected() {
     document.querySelector('#editInfoInfectedButton').addEventListener('click', (e) => {
         e.preventDefault()
@@ -350,12 +348,158 @@ function addEventListenerToEditButtonInfected() {
 }
 
 
+// admin page - Traffic Light Plan - event listener to submit new city
+function addEventListenerToAddInfoButtonTraffic() {
+    let button = document.querySelector('#addInfoButtonTraffic')
+    button.addEventListener('click', (e)=>{
+        e.preventDefault()
+        console.log('submit!');
+
+        let city = document.querySelector('#cityTraffic').value
+        let score = document.querySelector('#score').value
+        let newInfectedsFor10KPeople = document.querySelector('#newInfectedsFor10KPeople').value
+        let positiveTestPercentage = document.querySelector('#positiveTestPercentage').value
+        let verifiedChangeRate = document.querySelector('#verifiedChangeRate').value
+        let activePatients = document.querySelector('#activePatients').value
+
+        let data = JSON.stringify({
+            "city": city,
+            "score": score,
+            "newInfectedsFor10KPeople":newInfectedsFor10KPeople,
+            "positiveTestPercentage": positiveTestPercentage,
+            "verifiedChangeRate": verifiedChangeRate,
+            "activePatients": activePatients
+        })
+        console.log(data);
+
+        let xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+
+        xhr.addEventListener("readystatechange", function() {
+        if(this.readyState === 4) {
+            console.log(this.responseText);
+            let jsonData = JSON.parse(this.responseText)
+            console.log(jsonData);
+            
+            if(jsonData.data){
+                alert('Your details have been successfully uploaded!')
+                window.location.href = "/admin-view"
+            } else {
+                alert('opsss! something want wrong :( Please try to upload again')
+            }
+        }
+        });
+
+        xhr.open("POST", "/traffic-light-plan");
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.send(data);
+    })
+}
+// admin page - Traffic Light Plan - searching for a city 
+function addEventListenerToSearchButtonTrafficLightPlan() {
+    document.querySelector('#searchButtonTraffic').addEventListener('click', (e) => {
+        e.preventDefault()
+        let cityName = document.querySelector('#searchCityTraffic').value
+
+        fetch(`/traffic-light-plan/search/${cityName}`)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            setTrafficLightTable(data)
+        });
+    }) 
+}
+// admin page - Traffic Light Plan - set table
+function setTrafficLightTable(jsonObj) {
+    let trafficDiv = document.querySelector('#editCityTrafficInfoDiv')
+    
+    if(jsonObj.length === 0 ){
+        let p = document.createElement('p')
+        p.innerHTML = 'אין מידע על התאריך הזה'
+        p.id = 'noResultPTraffic'
+        trafficDiv.appendChild(p)
+        return
+    }
+
+    let labelList = ['ישוב','ציון','חולים חדשים לכל 10,000 נפש','% הבדיקות החיוביות','שיעור שינוי מאומתים','חולים פעילים']
+    let keysList = ['city', 'score', 'newInfectedsFor10KPeople', 'positiveTestPercentage', 'verifiedChangeRate', 'activePatients']
+
+    for(let i = 0 ; i < labelList.length ; i++){
+        let label = document.createElement('label')
+        label.textContent = labelList[i]
+        label.classList.add('formTitle')
+        trafficDiv.appendChild(label)
+    }
+    for(let i = 0 ; i < keysList.length ; i++){
+        let input = document.createElement('input')
+        input.value = jsonObj[0][keysList[i]]
+        input.id = keysList[i] + 'EditTraffic'
+        trafficDiv.appendChild(input)
+    }
+
+    let divButton = document.createElement('div')
+    divButton.classList.add('trafficDivButton')
+    trafficDiv.appendChild(divButton)
+
+    let button = document.createElement('button')
+    button.id = 'editInfoTrafficButton'
+    button.textContent = 'ערוך'
+    divButton.appendChild(button)
+
+    addEventListenerToEditButtonTraffic()
+    document.querySelector('#searchButtonTraffic').classList.toggle('notDisplay')
+    document.querySelector('#noResultPTraffic').classList.toggle('notDisplay')
+}
+// admin page - Traffic Light Plan - edit infected info
+function addEventListenerToEditButtonTraffic() {
+    document.querySelector('#editInfoTrafficButton').addEventListener('click', (e) => {
+        e.preventDefault()
+        
+        let keys = ['score', 'newInfectedsFor10KPeople', 'positiveTestPercentage', 'verifiedChangeRate', 'activePatients']
+        let city = document.querySelector('#searchCityTraffic').value
+
+        let data = {city: city}
+        for(let i = 0 ; i < keys.length ; i++){
+            data[keys[i]] = document.querySelector('#' + keys[i] + 'EditTraffic').value
+        }
+        console.log('data', data);
+
+        let dataStr = JSON.stringify(data);
+        
+        let xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+
+        xhr.addEventListener("readystatechange", function() {
+        if(this.readyState === 4) {
+            console.log(this.responseText);
+            let jsonData = JSON.parse(this.responseText)
+            if(jsonData._id){
+                alert('The details have been updated!')
+                window.location.href = "/admin-view"
+            } else {
+                alert('opsss! something want wrong :( Please try again')
+            }
+        }
+        });
+
+        xhr.open("PATCH", "/traffic-light-plan/edit");
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.send(dataStr);
+    })
+}
+
 
 if(document.querySelector('.adminView')!== null){
     window.onload = (e) => {
         addEventListenerToAddInfoButton()
         addEventListenerToSearchButton()
+
         addEventListenerToAddInfoButtonInfected()
         addEventListenerToSearchDateButton()
+
+        addEventListenerToAddInfoButtonTraffic()
+        addEventListenerToSearchButtonTrafficLightPlan()
     }
 }
