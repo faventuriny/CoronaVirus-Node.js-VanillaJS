@@ -3,6 +3,23 @@
     --dark-green: #1c7d7e;
     --light-green: #b6ca51;
 }
+@font-face{
+    font-family: 'OpenSans';
+    src: url('../fonts/OpenSansHebrew-Regular.ttf') format("truetype");
+    font-style: normal;
+}
+@font-face{
+    font-family: 'OpenSans';
+    src: url('../fonts/OpenSansHebrew-Bold.ttf') format("truetype");
+    font-style: bold;
+    font-weight: 700;
+}
+@font-face{
+    font-family: 'OpenSans';
+    src: url('../fonts/OpenSansHebrew-ExtraBold.ttf') format("truetype");
+    font-style: bold;
+    font-weight: 900;
+}
 html {
     margin: 0;
     padding: 0;
@@ -10,35 +27,191 @@ html {
 body {
     margin: 0;
     padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: OpenSans, Helvetica, sans-serif;
     background-color: var(--background-color);
     direction: rtl;
 }
-.general{
-    padding: 35px;
-    background-color: var(--background-color);
+.header {
+    background-color: white;
+    position: sticky;
+    top: 0;
+    box-shadow: 0 1px 20px 2px #dce1e7; 
 }
-.general div{
+.line{
+    height: 2px;
+    background-image: linear-gradient(90deg,#4bb887,#16b6d0,#d6e58a);
+}
+.headerContainer{
+    display: flex;
+    justify-content: space-between;
+}
+.logoAndHamburger{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.hamburger{
+    width: 30px;
+    height: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 5px;
+    margin-left: 10px;
+}
+.hamburger span {
+    width: 21px;
+    height: 2.33px;
+    background-color: #374f60;
+    border-radius: 10px;
+    box-shadow:  1px 2px 3px #dce1e7;
+}
+.logo img{
+    width: 252px;
+    height: 48px;
+}
+.update{
+    color: #24343F;
+    text-align: center;
+    padding: 15px;
+}
+.update h1{
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0;
+}
+.update p {
+    font-size: 0.9rem;
+    font-weight: 100;
+    margin: 0;
+}
+.accessiblity{
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    width: 15%;
+}
+.accessiblity button {
+    background-color: #39475d;
+    border-color: #39475d;
+    color: white;
+    border-radius: 50px;
+    padding: 5px 15px;
+    font-family: OpenSans, Helvetica, sans-serif;
+}
+.all-divs{
+    display: flex;
+}
+.rt-menu{
+    position: sticky;
+    top: 79px;
+    right: 0;
+    background-color: #364e5f;
+    box-shadow: 0 0 6px #000;
+    transition: .2s;
+    width: 84px;
+    height: 100vh;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    padding-top: 30px;
+}
+.rt-menu a {
+    padding: 10px;
+    font-size: 12px;
+    text-decoration: none;
+    color: #bebebe;
+    height: 66px;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-content: center;
+}
+.rt-menu a#generalSituationBar{
+    color: white;
+    border: 10px solid;
+    border-image-slice: 1;
+    border-width: 3px;
+    border-image-source: linear-gradient(45deg,#4bb887,#d6e58a,#16b6d0);
+    border-bottom: none;
+    border-top: none;
+    border-left: none;
+
+}
+.rt-menu a div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+.general{
+    padding: 2.25rem;
+    background-color: var(--background-color);
+    width: 100%;
+}
+.section{
     background-color: var(--background-color);
     display: flex;
-    flex-direction: row;
+    margin-right: -15px;
+    margin-left: -15px;
     justify-content: space-between;
+    margin-bottom: 20px;
+}
+.container{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.innerContainer {
+    background-color: white;
+    width: 100%;
+    height: 100%;
     border-radius: 10px;
 }
-.general div div {
-    background-color: white;
-}
-.section1 div{
-    width: 15vw;
+.section1 .container{
+    width: 16.6666667%;
     height: 12vw;
 }
-.section2 div{
+.section2 .container{
+    width: 100%;
     height: 28vw;
-    width: 100%;
-    margin-top: 1.3vw;
 }
-.section3 {
+.section3 .container{
     height: 23vw;
-    width: 100%;
-    margin-top: 1.3vw;
+}
+.section3 .container.rt{
+    width: 66.6666%;
+}
+.section3 .container.lf{
+    width: 33.3333%;
+}
+.section4 .container {
+    width: 33.3333%;
+    height: 52vw;
+}
+.section5 .container {
+    width: 33.3333%;
+    height: 23vw;
+}
+.section6 .container.lf {
+    width: 33.3333%;
+    height: 24vw;
+}
+.section6 .container.rt {
+    width: 66.6666%;
+    height: 24vw;
+}
+.section7 .container.lf {
+    width: 25%;
+    height: 24vw;
+}
+.section7 .container.cr {
+    width: 33.3333%;
+    height: 24vw;
+}
+.section7 .container.rt {
+    width: 41.6667%;
+    height: 24vw;
 }
