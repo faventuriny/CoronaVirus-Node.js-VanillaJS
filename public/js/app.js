@@ -643,3 +643,33 @@ if(document.querySelector('.adminView')!== null){
         addEventListenerToSearchButtonHospital()
     }
 }
+
+// add class name to hamburger to display the menue
+function toggleClassMainMenu(){
+    let menu = document.querySelector(".rt-menu");
+    menu.classList.toggle("toggleCls");
+}
+function changeHamburgerIcon(){
+    let span1 = document.querySelector("#span1");
+    let span2 = document.querySelector("#span2");
+    let span3 = document.querySelector("#span3");
+    span1.classList.toggle("hamburger-open-top");
+    span2.classList.toggle("hamburger-open-middle");
+    span3.classList.toggle("hamburger-open-bottom");
+}
+
+window.onload = (e) => {
+    addEventListenerToHamburger()
+}
+
+//Event Listener to click on the hamburger
+function addEventListenerToHamburger(){
+    let hamburger = document.querySelector(".hamburger");
+    hamburger.addEventListener("click", ()=>{
+        console.log('hamburger clicked');
+        
+        toggleClassMainMenu(); 
+        changeHamburgerIcon();
+    })
+}
+
