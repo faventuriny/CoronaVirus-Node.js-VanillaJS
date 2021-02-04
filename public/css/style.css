@@ -84,10 +84,16 @@ body {
     width: 252px;
     height: 48px;
 }
+.updateAndAccessiblity{
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% - 300px);
+}
 .update{
     color: #24343F;
     text-align: center;
     padding: 15px;
+    width: 100%;
 }
 .update h1{
     font-size: 1.2rem;
@@ -104,6 +110,7 @@ body {
     align-items: center;
     justify-content: right;
     width: 15%;
+    margin-left: 10%;
 }
 .accessiblity button {
     background-color: #39475d;
@@ -265,3 +272,102 @@ body {
         width: 41.6667%;
     }
 }
+@media only screen and (max-width: 1257px) {
+    .accessiblity{
+        width: 20%;
+        margin-left: 5%;
+    }
+}
+
+@media only screen and (max-width: 1015px) {
+    .accessiblity{
+        width: 30%;
+    }
+}
+@media only screen and (max-width: 980px){
+    .headerContainer{
+        flex-direction: column;
+    }
+    .logoAndHamburger{
+        justify-content: right;
+        margin-top: 10px;
+    }
+    .updateAndAccessiblity{
+        width: 100%;
+    }
+    .update{
+        text-align: right;
+    }
+    .update h1{
+        font-size: 13px;
+    }
+    .update p{
+        font-size: 10px;
+    }
+    .accessiblity{
+        margin: 0;
+        width: 20%;
+    }
+    .accessiblity button{
+        font-size: 10px;
+    }
+    .rt-menu{
+        top: 129px
+    }
+}
+@media only screen and (max-width: 991px){
+    .general{
+        padding: 1rem 1rem .5rem;
+    }
+    .section1 {
+        grid-template-columns: 1fr 1fr;
+    }
+    .section3,
+    .section4,
+    .section5,
+    .section6,
+    .section7 {
+        display: grid;
+        grid-template-columns: 1fr
+    }
+    .section3 .container.rt,
+    .section3 .container.lf,
+    .section6 .container.lf,
+    .section6 .container.rt,
+    .section7 .container.lf,
+    .section7 .container.cr {
+        width: auto;
+    }
+}
+@media only screen and (max-width: 760px){
+    .section7 .container.rt{
+        width: auto
+    }
+    .accessiblity{
+        width: 20%;
+    }
+}
+@media only screen and (max-width: 594px){
+
+    .accessiblity{
+        width: 30%;
+    }
+}
+@media only screen and (max-width: 452px){
+    .rt-menu a {
+        padding: 0;
+    }
+}
+@media only screen and (max-width: 420px){
+    .general{
+        padding: .6rem .6rem .5rem;
+    }
+    .accessiblity button {
+        padding: 5px 5px
+    }
+    .update{
+        padding-left: 0;
+    } 
+
+}
+
