@@ -657,11 +657,6 @@ function changeHamburgerIcon(){
     span2.classList.toggle("hamburger-open-middle");
     span3.classList.toggle("hamburger-open-bottom");
 }
-
-window.onload = (e) => {
-    addEventListenerToHamburger()
-}
-
 //Event Listener to click on the hamburger
 function addEventListenerToHamburger(){
     let hamburger = document.querySelector(".hamburger");
@@ -672,4 +667,156 @@ function addEventListenerToHamburger(){
         changeHamburgerIcon();
     })
 }
+function loadSection1(){
+    fetch('/infected-and-deceased')
+    .then(response => response.json())
+    .then(data => {
+        let latestData = data[data.length-1]
+        console.log(latestData) 
+        loadNewInfected(latestData) 
+        // loadActivePatients(latestData)
+    }); 
+}
+function loadNewInfected(data) {
+    let newInfectedDiv = document.querySelector('#newInfected')
+    let h1 = document.createElement('h1')
+    h1.innerHTML = returnNumberWithComma(data.newInfecteds) 
+    newInfectedDiv.appendChild(h1)
+
+    let div1 = document.createElement('div')
+    newInfectedDiv.appendChild(div1)
+
+    let p1 = document.createElement('p')
+    p1.innerHTML = `${returnNumberWithComma(data.newInfectedsFromMidNight)}+`
+    p1.classList.add('bold')
+    div1.appendChild(p1)
+
+    let p2 = document.createElement('p')
+    p2.innerHTML = 'מחצות'
+    div1.appendChild(p2)
+
+    let div2 = document.createElement('div')
+    newInfectedDiv.appendChild(div2)
+
+    let p3 = document.createElement('p')
+    p3.innerHTML = `${returnNumberWithComma(data.totalInfecteds)}+`
+    p3.classList.add('bold')
+    div2.appendChild(p3)
+
+    let p4 = document.createElement('p')
+    p4.innerHTML = 'סה"כ'
+    div2.appendChild(p4)
+}
+function loadActivePatients(data) {
+    let newInfectedDiv = document.querySelector('#activePatients')
+    let h1 = document.createElement('h1')
+    h1.innerHTML = returnNumberWithComma(data.activePatients) 
+    newInfectedDiv.appendChild(h1)
+
+    let div1 = document.createElement('div')
+    newInfectedDiv.appendChild(div1)
+
+    let p1 = document.createElement('p')
+    p1.innerHTML = `${returnNumberWithComma(data.activePatientsFromMidNight)}+`
+    p1.classList.add('bold')
+    div1.appendChild(p1)
+
+    let p2 = document.createElement('p')
+    p2.innerHTML = 'מחצות'
+    div1.appendChild(p2)
+
+    let div2 = document.createElement('div')
+    newInfectedDiv.appendChild(div2)
+
+    let p3 = document.createElement('p')
+    p3.innerHTML = `${returnNumberWithComma(data.totalInfecteds)}+`
+    p3.classList.add('bold')
+    div2.appendChild(p3)
+
+    let p4 = document.createElement('p')
+    p4.innerHTML = 'סה"כ'
+    div2.appendChild(p4)
+}
+
+function returnNumberWithComma(num) {
+    return num.toLocaleString('en', {useGrouping:true})
+}
+
+window.onload = (e) => {
+    addEventListenerToHamburger()
+    loadSection1()
+}
+// document.addEventListener('DOMContentLoaded', ()=>{
+//     Highcharts.chart('testChart', {
+//         chart: {
+//             type: 'areaspline',
+//         },
+//         credites:{
+//             enabled: false
+//         },
+//         title: {
+//             text: 'Our First Chart'
+//         },
+//         colors: ['#1c110a','#e4d6a7','#e9b44c','#9b2915','#50A2A7'],
+//         tooltip: {
+//             formatter(){
+//                 let s = `<strong> X is: </strong> ${this.x}`;
+//                 this.points.forEach(function(point){
+//                     s += `<br> Y is: ${point.y}`
+//                 })
+//             },
+//             shared: true,
+//             backgroundColor: '#333333',
+//             borderColor: 'red',
+//             borderRadius: 20,
+//             followPointer: true,
+//             style: {
+//                 color: '#ffffff'
+//             }
+//         },
+//         yAxis: {
+//             title: {
+//                 text: 'Fruits Eaten'
+//             }
+//         },
+//         xAxis: {
+//             categories: ['Apples', 'Bananas', 'Orange']
+//         },
+//         series: [
+//             {
+//                 name: 'Fruit consumption',
+//                 negativeColor: 'red',
+//                 data: [1,2,3,4,10,-20,2,50,100,200,2,40,30,100,1]
+//                 // data: [
+//                 //     {
+//                 //         name: 'Jack',
+//                 //         y: 10,
+//                 //         color: 'red',
+//                 //         x: 2   
+//                 //     },
+//                 //     {
+//                 //         name: 'Jane',
+//                 //         y: 20,
+//                 //         color: 'red',
+//                 //         x: 4   
+//                 //     },
+//                 //     {
+//                 //         name: 'Jenny',
+//                 //         y: 13,
+//                 //         color: 'red',
+//                 //         x: 1   
+//                 //     }
+//                 // ]
+//             }
+//         ]
+//     })
+//     fetch('').then(res=>{
+//         return res.JSON();
+//     }).then(data=>{
+//         options.dsts = {
+//             data
+//         }
+//         Highcharts.chart('container', options)
+//     })
+// })
 

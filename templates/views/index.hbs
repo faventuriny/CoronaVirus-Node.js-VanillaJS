@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./css/style.css" rel="stylesheet">
+    <script src="https://code.highcharts.com/highcharts.js"></script>
     <title>Corona Virus</title>
 </head>
 <body>
@@ -97,27 +98,54 @@
         <div class="general">
             <div class="section1 section">
                 <div class="container">
-                    <div class="innerContainer"></div>
+                    <div class="innerContainer">
+                        <div id="newInfected">  
+                            <h2>מאומתים חדשים מאתמול</h2>
+                        </div>
+                    </div>
                 </div>
                 <div class="container">
-                    <div class="innerContainer"></div>
+                    <div class="innerContainer">
+                        <div id="activePatients">  
+                            <h2>חולים פעילים</h2>
+                        </div>
+                    </div>
                 </div>
                 <div class="container">
-                    <div class="innerContainer"></div>
+                    <div class="innerContainer">
+                        <div id="">  
+                            <h2>חולים קשה</h2>
+                        </div>
+                    </div>
                 </div>
                 <div class="container">
-                    <div class="innerContainer"></div>
+                    <div class="innerContainer">
+                        <div id="">  
+                            <h2>מתחסנים מנה ראשונה</h2>
+                        </div>
+                        <div id="">  
+                            <h2>מתחסנים מנה שניה</h2>
+                        </div>
+                    </div>
                 </div>
                 <div class="container">
-                    <div class="innerContainer"></div>
+                    <div class="innerContainer">
+                        <div id="">  
+                            <h2>נפטרים מצטבר</h2>
+                        </div>
+                    </div>
                 </div>
                 <div class="container">
-                    <div class="innerContainer"></div>
+                    <div class="innerContainer">
+                        <div id="">  
+                            <h2>אחוז בדיקות חיוביות אתמול</h2>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="section2 section">
                 <div class="container">
-                    <div class="innerContainer"></div>
+                    <div class="innerContainer" id="testChart"></div>
                 </div>
             </div>
             <div class="section3 section">

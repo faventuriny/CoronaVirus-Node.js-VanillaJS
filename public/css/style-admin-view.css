@@ -99,3 +99,52 @@ input{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
 }
+@media only screen and (max-width: 1200px){
+    .vaccinDiv h1{
+        font-size: 2em;
+    }
+    
+    .vaccinDiv 
+    .addNewInfo h1, 
+    .vaccinDiv 
+    .editInfo h1{
+        font-size: 1.2em;
+    }
+    .vaccinForm label, 
+    .formTitle{
+        font-size: 0.75em;
+    }
+    .addNewInfo, .editInfo{
+        overflow-x: scroll;
+    }
+}
+@media only screen and (max-width: 640px){
+    #searchButton{
+        margin-right: 0;
+        margin-top: 20px;
+    }
+}
+@media only screen and (max-width: 480px){
+    .vaccinDiv{
+        margin: 20px;
+        padding: 20px;
+    }
+    .vaccinDiv h1{
+        font-size: 1.2em;
+    }
+    .vaccinDiv 
+    .addNewInfo h1, 
+    .vaccinDiv 
+    .editInfo h1{
+        font-size: 1em;
+    }
+    .vaccinForm label, 
+    .formTitle{
+        font-size: 0.75em;
+    }
+    .divButton button, #searchButton, #searchButtonInfected, #editInfoInfectedButton, #searchButtonTraffic, #editInfoTrafficButton, #searchButtonHospital, #editInfoHospitalButton{
+        width: 60px;
+        height: 30px;
+        font-size: 1em;
+    }
+}
