@@ -105,6 +105,18 @@ body {
 .innerContainer div div.criticalAndRespiratory{
     flex-direction: column;
 }
+#vaccinDose1, 
+#vaccinDose2{
+    flex-direction: column;
+}
+#vaccinDose1 div{
+    border-bottom: 1px solid var(--background-color);
+}
+#vaccinDose1 p,
+#vaccinDose2 p {
+    padding-bottom: 8px;
+    margin-bottom: 4px;
+}
 .section2 {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
