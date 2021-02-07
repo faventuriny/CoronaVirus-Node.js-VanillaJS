@@ -1,0 +1,48 @@
+
+.rt-menu{
+    position: sticky;
+    top: 79px;
+    right: 0;
+    background-color: #364e5f;
+    box-shadow: 0 0 6px #000;
+    transition: .2s;
+    width: 84px;
+    height: 100vh;
+    text-align: center;
+    flex-direction: column;
+    padding-top: 30px;
+    display: none;
+}
+.toggleCls {
+    display: flex;
+}
+.rt-menu a {
+    padding: 10px;
+    font-size: 12px;
+    text-decoration: none;
+    color: #bebebe;
+    height: 66px;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-content: center;
+}
+.rt-menu a#generalSituationBar{
+    color: white;
+    border: 10px solid;
+    border-image-slice: 1;
+    border-width: 3px;
+    border-image-source: linear-gradient(45deg,#4bb887,#d6e58a,#16b6d0);
+    border-bottom: none;
+    border-top: none;
+    border-left: none;
+
+}
+.rt-menu a div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}

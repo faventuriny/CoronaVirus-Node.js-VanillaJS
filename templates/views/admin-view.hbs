@@ -5,10 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./css/style.css" rel="stylesheet">
     <link href="./css/style-admin-view.css" rel="stylesheet">
+    <link href="./css/style-header.css" rel="stylesheet">
+    <link href="./css/style-side-menu.css" rel="stylesheet">
     <title>Admin View</title>
 </head>
 <body class="adminView">
-    <div class="all-elemts">
+    {{>header}}
+     <div class="all-divs">
+         {{>sideMenu}}
+         <div class="all-elemts">
         <div class="vaccinDiv">
             <h1>
                 התחסנות לפי ישוב ותאריך
@@ -72,6 +77,10 @@
                             <input type="text" id="addSeriouslyIllFromMidNight"  placeholder="חולים קשה מחצות">
                             <input type="text" id="addCriticalIll"  placeholder="חולים במצב קריטי">
                             <input type="text" id="addRespiratoryPatients"  placeholder="חולים מונשמים">                            
+                        </div>
+                        <div class="infected">
+                            <input type="text" id="vaccinatedDose1"  placeholder='סה"כ מתחסנים מנה ראשונה'>
+                            <input type="text" id="vaccinatedDose2"  placeholder='סה"כ מתחסנים מנה שניה'>                         
                         </div>
                         <div class="infected">
                             <input type="text" id="addDeceased"  placeholder="נפטרים">
@@ -163,8 +172,9 @@
                 <div id="editHospitalInfoDiv" class="gridHospital"></div>
             </div>
         </div>
-        
     </div>
+     </div>
+    
     <script src="./js/app.js"></script>
 </body>
 </html>

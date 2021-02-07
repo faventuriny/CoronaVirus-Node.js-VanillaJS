@@ -54,6 +54,14 @@ const infectedAndDeceasedSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    vaccinatedDose1: {
+        type: Number,
+        required: true
+    },
+    vaccinatedDose2: {
+        type: Number,
+        required: true
+    },
     deceased: {
         type: Number,
         required: true

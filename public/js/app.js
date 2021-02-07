@@ -186,6 +186,9 @@ function addEventListenerToAddInfoButtonInfected() {
         let addCriticalIll = document.querySelector('#addCriticalIll').value
         let addRespiratoryPatients = document.querySelector('#addRespiratoryPatients').value
 
+        let vaccinatedDose1 = document.querySelector('#vaccinatedDose1').value
+        let vaccinatedDose2 = document.querySelector('#vaccinatedDose2').value
+
         let addDeceased = document.querySelector('#addDeceased').value
 
         let addPositiveResults = document.querySelector('#addPositiveResults').value
@@ -208,6 +211,9 @@ function addEventListenerToAddInfoButtonInfected() {
             seriouslyIllFromMidNight: addSeriouslyIllFromMidNight,
             criticalIll: addCriticalIll,
             respiratoryPatients: addRespiratoryPatients,
+
+            vaccinatedDose1: vaccinatedDose1,
+            vaccinatedDose2: vaccinatedDose2,
 
             deceased: addDeceased,
             
@@ -630,6 +636,8 @@ function addEventListenerToEditButtonHospital() {
 
 if(document.querySelector('.adminView')!== null){
     window.onload = (e) => {
+        addEventListenerToHamburger() 
+        
         addEventListenerToAddInfoButton()
         addEventListenerToSearchButton()
 
@@ -668,13 +676,17 @@ function addEventListenerToHamburger(){
     })
 }
 function loadSection1(){
+    console.log('fetch');
+    
     fetch('/infected-and-deceased')
     .then(response => response.json())
     .then(data => {
         let latestData = data[data.length-1]
         console.log(latestData) 
         loadNewInfected(latestData) 
-        // loadActivePatients(latestData)
+        loadActivePatients(latestData)
+        loadSeriouslyIll(latestData)
+        loadVaccinated(latestData)
     }); 
 }
 function loadNewInfected(data) {
@@ -708,13 +720,14 @@ function loadNewInfected(data) {
     div2.appendChild(p4)
 }
 function loadActivePatients(data) {
-    let newInfectedDiv = document.querySelector('#activePatients')
+    let activePatientsDiv = document.querySelector('#activePatients')
+    
     let h1 = document.createElement('h1')
     h1.innerHTML = returnNumberWithComma(data.activePatients) 
-    newInfectedDiv.appendChild(h1)
+    activePatientsDiv.appendChild(h1)
 
     let div1 = document.createElement('div')
-    newInfectedDiv.appendChild(div1)
+    activePatientsDiv.appendChild(div1)
 
     let p1 = document.createElement('p')
     p1.innerHTML = `${returnNumberWithComma(data.activePatientsFromMidNight)}+`
@@ -726,26 +739,164 @@ function loadActivePatients(data) {
     div1.appendChild(p2)
 
     let div2 = document.createElement('div')
-    newInfectedDiv.appendChild(div2)
+    div2.classList.add('activePatGrid')
+    div2.classList.add('part3')
+    activePatientsDiv.appendChild(div2)
 
     let p3 = document.createElement('p')
-    p3.innerHTML = `${returnNumberWithComma(data.totalInfecteds)}+`
-    p3.classList.add('bold')
+    p3.innerHTML = 'בית / קהילה'
     div2.appendChild(p3)
 
     let p4 = document.createElement('p')
-    p4.innerHTML = 'סה"כ'
+    p4.innerHTML = 'מלון'
     div2.appendChild(p4)
+    
+    let p5 = document.createElement('p')
+    p5.innerHTML = 'בי"ח'
+    div2.appendChild(p5)
+
+    let p6 = document.createElement('p')
+    p6.innerHTML = `${returnNumberWithComma(data.activePatientsAtHoma)}+`
+    p6.classList.add('bold')
+    div2.appendChild(p6)
+
+    let p7 = document.createElement('p')
+    p7.innerHTML = `${returnNumberWithComma(data.activePatientsAtHotel)}+`
+    p7.classList.add('bold')
+    div2.appendChild(p7)
+
+    let p8 = document.createElement('p')
+    p8.innerHTML = `${returnNumberWithComma(data.activePatientsAtHospital)}+`
+    p8.classList.add('bold')
+    div2.appendChild(p8)
 }
+function loadSeriouslyIll(data) {
+    let newInfectedDiv = document.querySelector('#seriouslyIll')
+    let h1 = document.createElement('h1')
+    h1.innerHTML = returnNumberWithComma(data.seriouslyIll) 
+    newInfectedDiv.appendChild(h1)
+
+    let div1 = document.createElement('div')
+    newInfectedDiv.appendChild(div1)
+
+    let p1 = document.createElement('p')
+    p1.innerHTML = `${returnNumberWithComma(data.seriouslyIllFromMidNight)}+`
+    p1.classList.add('bold')
+    div1.appendChild(p1)
+
+    let p2 = document.createElement('p')
+    p2.innerHTML = 'מחצות'
+    div1.appendChild(p2)
+
+    let div2 = document.createElement('div')
+    div2.classList.add('criticalAndRespiratory')
+    div2.classList.add('part3')
+    newInfectedDiv.appendChild(div2)
+
+    let div3 = document.createElement('div')
+    div2.appendChild(div3)
+
+    let div4 = document.createElement('div')
+    div2.appendChild(div4)
+
+    let p3_1 = document.createElement('p')
+    p3_1.innerHTML = '<i class="fas fa-circle"></i>'//עיגול
+    p3_1.classList.add('red')
+    div3.appendChild(p3_1)
+    
+    let p3_2 = document.createElement('p')
+    p3_2.innerHTML = "מתוכם קריטי"
+    div3.appendChild(p3_2)
+
+    let p3_3 = document.createElement('p')
+    p3_3.innerHTML = `${returnNumberWithComma(data.criticalIll)}`
+    p3_3.classList.add('bold')
+    div3.appendChild(p3_3)
+
+    let p4_1 = document.createElement('p')
+    p4_1.innerHTML = '<i class="fas fa-circle"></i>'//עיגול
+    p4_1.classList.add('orange')
+    div4.appendChild(p4_1)
+    
+    let p4_2 = document.createElement('p')
+    p4_2.innerHTML = "מונשמים"
+    div4.appendChild(p4_2)
+
+    let p4_3 = document.createElement('p')
+    p4_3.innerHTML = `${returnNumberWithComma(data.respiratoryPatients)}`
+    p4_3.classList.add('bold')
+    div4.appendChild(p4_3)
+}
+function loadVaccinated(data) {
+    let vaccinDose1 = document.querySelector('#vaccinDose1')
+    let h1 = document.createElement('h1')
+    h1.innerHTML = returnNumberWithComma(data.seriouslyIll) 
+    vaccinDose1.appendChild(h1)
+
+    let div1 = document.createElement('div')
+    vaccinDose1.appendChild(div1)
+
+    let p1 = document.createElement('p')
+    p1.innerHTML = `${returnNumberWithComma(data.seriouslyIllFromMidNight)}+`
+    p1.classList.add('bold')
+    div1.appendChild(p1)
+
+    let p2 = document.createElement('p')
+    p2.innerHTML = 'מחצות'
+    div1.appendChild(p2)
+
+    let div2 = document.createElement('div')
+    div2.classList.add('criticalAndRespiratory')
+    div2.classList.add('part3')
+    newInfectedDiv.appendChild(div2)
+
+    let div3 = document.createElement('div')
+    div2.appendChild(div3)
+
+    let div4 = document.createElement('div')
+    div2.appendChild(div4)
+
+    let p3_1 = document.createElement('p')
+    p3_1.innerHTML = '<i class="fas fa-circle"></i>'//עיגול
+    p3_1.classList.add('red')
+    div3.appendChild(p3_1)
+    
+    let p3_2 = document.createElement('p')
+    p3_2.innerHTML = "מתוכם קריטי"
+    div3.appendChild(p3_2)
+
+    let p3_3 = document.createElement('p')
+    p3_3.innerHTML = `${returnNumberWithComma(data.criticalIll)}`
+    p3_3.classList.add('bold')
+    div3.appendChild(p3_3)
+
+    let p4_1 = document.createElement('p')
+    p4_1.innerHTML = '<i class="fas fa-circle"></i>'//עיגול
+    p4_1.classList.add('orange')
+    div4.appendChild(p4_1)
+    
+    let p4_2 = document.createElement('p')
+    p4_2.innerHTML = "מונשמים"
+    div4.appendChild(p4_2)
+
+    let p4_3 = document.createElement('p')
+    p4_3.innerHTML = `${returnNumberWithComma(data.respiratoryPatients)}`
+    p4_3.classList.add('bold')
+    div4.appendChild(p4_3)
+}
+
 
 function returnNumberWithComma(num) {
     return num.toLocaleString('en', {useGrouping:true})
 }
 
-window.onload = (e) => {
-    addEventListenerToHamburger()
-    loadSection1()
+if(document.querySelector('.index') !== null){
+    window.onload = (e) => {
+        addEventListenerToHamburger()
+        loadSection1()
+    }
 }
+
 // document.addEventListener('DOMContentLoaded', ()=>{
 //     Highcharts.chart('testChart', {
 //         chart: {

@@ -31,146 +31,6 @@ body {
     background-color: var(--background-color);
     direction: rtl;
 }
-.header {
-    background-color: white;
-    position: sticky;
-    top: 0;
-    box-shadow: 0 1px 20px 2px #dce1e7; 
-}
-.line{
-    height: 2px;
-    background-image: linear-gradient(90deg,#4bb887,#16b6d0,#d6e58a);
-}
-.headerContainer{
-    display: flex;
-    justify-content: space-between;
-}
-.logoAndHamburger{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.hamburger{
-    width: 30px;
-    height: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    margin-right: 5px;
-    margin-left: 10px;
-}
-.hamburger span {
-    width: 21px;
-    height: 2.33px;
-    background-color: #374f60;
-    border-radius: 10px;
-    box-shadow:  1px 2px 3px #dce1e7;
-}
-.hamburger-open-top{
-    opacity: 1;
-    transform: rotate(45deg) translate(4px, 4px);
-    background: white; 
-}
-.hamburger-open-middle{
-    opacity: 0;
-    transform: rotate(0deg) scale(0.2, 0.2);
-}
-.hamburger-open-bottom{
-    
-    transform: rotate(-45deg) translate(4px, -4px);
-}
-.logo img{
-    width: 252px;
-    height: 48px;
-}
-.updateAndAccessiblity{
-    display: flex;
-    justify-content: space-between;
-    width: calc(100% - 300px);
-}
-.update{
-    color: #24343F;
-    text-align: center;
-    padding: 15px;
-    width: 100%;
-}
-.update h1{
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin: 0;
-}
-.update p {
-    font-size: 0.9rem;
-    font-weight: 100;
-    margin: 0;
-}
-.accessiblity{
-    display: flex;
-    align-items: center;
-    justify-content: right;
-    width: 15%;
-    margin-left: 10%;
-}
-.accessiblity button {
-    background-color: #39475d;
-    border-color: #39475d;
-    color: white;
-    border-radius: 50px;
-    padding: 5px 15px;
-    font-family: OpenSans, Helvetica, sans-serif;
-}
-
-.all-divs{
-    display: flex;
-}
-.rt-menu{
-    position: sticky;
-    top: 79px;
-    right: 0;
-    background-color: #364e5f;
-    box-shadow: 0 0 6px #000;
-    transition: .2s;
-    width: 84px;
-    height: 100vh;
-    text-align: center;
-    flex-direction: column;
-    padding-top: 30px;
-    display: none;
-}
-.toggleCls {
-    display: flex;
-}
-.rt-menu a {
-    padding: 10px;
-    font-size: 12px;
-    text-decoration: none;
-    color: #bebebe;
-    height: 66px;
-    display: flex;
-    flex-direction: column;
-    justify-items: center;
-    align-content: center;
-}
-.rt-menu a#generalSituationBar{
-    color: white;
-    border: 10px solid;
-    border-image-slice: 1;
-    border-width: 3px;
-    border-image-source: linear-gradient(45deg,#4bb887,#d6e58a,#16b6d0);
-    border-bottom: none;
-    border-top: none;
-    border-left: none;
-
-}
-.rt-menu a div{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-}
 .general{
     padding: 2.25rem;
     background-color: var(--background-color);
@@ -221,14 +81,30 @@ body {
     display: flex;
     margin-top: 5px;
 }
+.innerContainer div div.part3{
+    margin-top: 18px;
+}
 .section1 {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: auto;
 }
-.section1 .container{
-    height: 12vw;
-}
 
+.innerContainer div div.activePatGrid{
+    display: grid;
+    grid-template-columns: 80px 60px 80px;
+}
+.fa-circle{
+    font-size: 0.6rem;
+}
+.red .fa-circle {
+    color: #FB5377;
+}
+.orange .fa-circle {
+    color: #E6B957;
+}
+.innerContainer div div.criticalAndRespiratory{
+    flex-direction: column;
+}
 .section2 {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
