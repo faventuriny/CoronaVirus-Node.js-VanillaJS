@@ -897,77 +897,136 @@ if(document.querySelector('.index') !== null){
     }
 }
 
-// document.addEventListener('DOMContentLoaded', ()=>{
-//     Highcharts.chart('testChart', {
-//         chart: {
-//             type: 'areaspline',
-//         },
-//         credites:{
-//             enabled: false
-//         },
-//         title: {
-//             text: 'Our First Chart'
-//         },
-//         colors: ['#1c110a','#e4d6a7','#e9b44c','#9b2915','#50A2A7'],
-//         tooltip: {
-//             formatter(){
-//                 let s = `<strong> X is: </strong> ${this.x}`;
-//                 this.points.forEach(function(point){
-//                     s += `<br> Y is: ${point.y}`
-//                 })
-//             },
-//             shared: true,
-//             backgroundColor: '#333333',
-//             borderColor: 'red',
-//             borderRadius: 20,
-//             followPointer: true,
-//             style: {
-//                 color: '#ffffff'
-//             }
-//         },
-//         yAxis: {
-//             title: {
-//                 text: 'Fruits Eaten'
-//             }
-//         },
-//         xAxis: {
-//             categories: ['Apples', 'Bananas', 'Orange']
-//         },
-//         series: [
-//             {
-//                 name: 'Fruit consumption',
-//                 negativeColor: 'red',
-//                 data: [1,2,3,4,10,-20,2,50,100,200,2,40,30,100,1]
-//                 // data: [
-//                 //     {
-//                 //         name: 'Jack',
-//                 //         y: 10,
-//                 //         color: 'red',
-//                 //         x: 2   
-//                 //     },
-//                 //     {
-//                 //         name: 'Jane',
-//                 //         y: 20,
-//                 //         color: 'red',
-//                 //         x: 4   
-//                 //     },
-//                 //     {
-//                 //         name: 'Jenny',
-//                 //         y: 13,
-//                 //         color: 'red',
-//                 //         x: 1   
-//                 //     }
-//                 // ]
-//             }
-//         ]
-//     })
-//     fetch('').then(res=>{
-//         return res.JSON();
-//     }).then(data=>{
-//         options.dsts = {
-//             data
-//         }
-//         Highcharts.chart('container', options)
-//     })
-// })
+// add graph to dayly vaccinate
+if(document.querySelector('.index') !== null){
+    document.addEventListener('DOMContentLoaded', ()=>{
+        loadDataForNumOfVaccinate()
+
+    })
+}
+
+function loadDataForNumOfVaccinate(){
+    fetch('/vaccine-population')
+    .then(response => response.json())
+    .then(data => {
+        let y1Data = []
+        let y2Data = []
+        let dates = []
+
+        let n = data.length - 1
+
+        for (let i = n; i > data.length-28; i--) {   
+            y1Data.unshift(data[i].dailyFirstDose)
+            y2Data.unshift(data[i].dailySecDose) 
+            dates.unshift(data[i].date[8]+data[i].date[9]+"."+data[i].date[5]+data[i].date[6]) 
+        }
+        setNumOfVaccinatedGraph(y1Data, y2Data, dates)
+    });
+}
+function setNumOfVaccinatedGraph(y1Data, y2Data, dates){
+    Highcharts.setOptions({
+        lang: {
+          decimalPoint: '.',
+          thousandsSep: ','
+        }
+    });
+    Highcharts.chart('dailyNumOfVaccinatedsGraph', {
+        chart: {
+            zoomType: 'xy',
+            panning: true,
+            panKey: 'shift',
+            type: 'column',
+            backgroundColor: null,
+            backgroundColor: 'transparent'
+        },
+        credits:{
+            enabled: false
+        },
+        title: {
+            text: 'מספר מתחסנים יומי',
+            style: {
+                color: 'white'
+            }
+        },
+        colors: ['#1c7d7e','#b6ca51'],
+        yAxis: {
+            lineWidth: 1,
+            tickWidth: 1,
+            title: {
+                // text: "מספר מתחסנים",
+                text: 'מספר<br>מתחסנים',
+                align: 'high',
+                textAlign: "right",
+                offset: 0,
+                rotation: 0,
+                y: -30,
+                x: 10,
+                style: {
+                    fontSize: '14px',
+                    fontFamily: 'OpenSans',
+                    textAlign: "right",
+                    // width: '50px'
+                }
+            },
+            tickInterval: 50000,
+            endOnTick: false,
+
+        },
+        xAxis: {
+            title: {
+                text: 'תאריך',
+                style: {
+                    fontSize: '14px',
+                    fontFamily: 'OpenSans',
+                    textAlign: "right"
+                }
+            },
+            categories: dates,
+            tickInterval: 5,
+        },
+        series: [
+            {
+                name: 'מתחסנים מנה שניה',
+                data: y2Data,
+                color: '#b6ca51'
+            },
+            {
+                name: 'מתחסנים מנה ראשונה',
+                data: y1Data,
+                color: '#1c7d7e',
+            },
+            
+        ],
+        plotOptions: {
+            series: {
+                stacking: 'overlap',
+                lineWidth: 1
+            },
+            column: {
+                pointPadding: -0.15,
+                borderWidth: 0
+            }
+        },
+        legend: {
+            enabled: false
+        }
+        // tooltip: {
+        //     formatter(){
+        //         let s = `<strong>  </strong> ${this.x}`;
+        //         this.points.forEach(function(point){
+        //             s += `<br> Y is: ${point.y}`
+        //         })
+        //     },
+        //     shared: true,
+        //     backgroundColor: '#333333',
+        //     borderColor: 'red',
+        //     borderRadius: 20,
+        //     followPointer: true,
+        //     style: {
+        //         color: '#ffffff'
+        //     }
+        // }
+    })
+}
+
 

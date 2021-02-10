@@ -2,6 +2,8 @@
     --background-color: #edf1f7;
     --dark-green: #1c7d7e;
     --light-green: #b6ca51;
+    --divider-color: #d8d8d9;
+    --menu-background-color: #F7F9FC;
 }
 @font-face{
     font-family: 'OpenSans';
@@ -76,7 +78,7 @@ body {
 .innerContainer div {
     padding: 15px;
 }
-.innerContainer div div {
+.section1 .innerContainer div div {
     padding: 0;
     display: flex;
     margin-top: 5px;
@@ -121,9 +123,68 @@ body {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
 }
-.section2 .container{
-    height: 28vw;
+.section2 .innerContainer div{
+    padding: 0;
 }
+.section2 .innerContainer h1{
+    text-align: center;
+    padding: 26px;
+}
+.section2-graphs-container{
+    display: flex;
+    justify-content: space-between;
+}
+#dailyNumOfVaccinateds,
+#cumulativeNumOfVaccinateds,
+#numOfVaccinatedsFromAllPopulation{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+#dailyNumOfVaccinateds,
+#cumulativeNumOfVaccinateds{
+    border-left: 1px solid var(--divider-color);
+    border-top: 1px solid var(--divider-color);
+}
+#numOfVaccinatedsFromAllPopulation{
+    border-top: 1px solid var(--divider-color);
+}
+.section2-graphTitle,
+.section2-openMenu{
+    display: flex;
+    justify-content: space-between;
+}
+.innerContainer div div.section2-graphTitle{
+    padding: 16px 24px ;
+}
+.section2-openMenu{
+    border: var(--divider-color) 1px solid;
+    border-radius: 20px;
+    background-color: var(--menu-background-color);
+    width: 145px;
+}
+.section2-openMenu p{
+    padding: 8px 16px;
+}
+.innerContainer div div.section2-menu{
+    display: none;
+}
+.innerContainer div div.section2-assembly{
+    padding: 0 24px;
+    display: flex;
+}
+.darkGreen .fa-circle {
+    color: var(--dark-green);
+}
+.lightGreen .fa-circle {
+    color: var(--light-green);
+}
+#dailyNumOfVaccinatedsGraph, 
+#cumulativeNumOfVaccinatedsGraph,
+#numOfVaccinatedsFromAllPopulationGraph{
+    height: 257px;
+}
+
 .section3{
     grid-template-columns: 66.6667% 33.3333%;
 }

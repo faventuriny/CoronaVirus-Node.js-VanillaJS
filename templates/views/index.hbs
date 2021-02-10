@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Alef&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/638f0ae76f.js" crossorigin="anonymous"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
     <title>Corona Virus</title>
 </head>
 <body class="index">
@@ -68,7 +69,86 @@
             </div>
             <div class="section2 section">
                 <div class="container">
-                    <div class="innerContainer" id="testChart"></div>
+                    <div class="innerContainer">
+                        <h1>מדדי התחסנות</h1>
+                            <div class="section2-graphs-container">
+                                <div id="dailyNumOfVaccinateds">
+                                    <div class="section2-graphTitle">
+                                        <div><h2>מספר מתחסנים - יומי</h2></div>
+                                        <div class="section2-openMenu">
+                                            <p>חודש אחרון</p>
+                                            <p><i class="fas fa-chevron-down"></i></p>
+                                            <div class="section2-menu">
+                                                <p>עד עכשיו</p>
+                                                <p>שבוע אחרון</p>
+                                                <p>שבועיים אחרונים</p>
+                                                <p>חודש אחרון</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="section2-assembly">
+                                        <p class="darkGreen"><i class="fas fa-circle"></i></p>
+                                        <p>מתחסנים מנה ראשונה</p>
+                                        <p class="lightGreen"><i class="fas fa-circle"></i></p>
+                                        <p>מתחסנים מנה שניה</p>
+                                    </div>
+                                    <div id="dailyNumOfVaccinatedsGraph">
+                                        <h1>--פה יבוא גרף--</h1>
+                                    </div>
+                                </div>
+
+                                <div id="cumulativeNumOfVaccinateds">
+                                    <div class="section2-graphTitle">
+                                        <div><h2>מספר מתחסנים - מצטבר</h2></div>
+                                        <div class="section2-openMenu">
+                                            <p>חודש אחרון</p>
+                                            <p><i class="fas fa-chevron-down"></i></p>
+                                            <div class="section2-menu">
+                                                <p>עד עכשיו</p>
+                                                <p>שבוע אחרון</p>
+                                                <p>שבועיים אחרונים</p>
+                                                <p>חודש אחרון</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div  class="section2-assembly">
+                                        <p class="darkGreen"><i class="fas fa-circle"></i></p>
+                                        <p>מתחסנים מנה ראשונה</p>
+                                        <p class="lightGreen"><i class="fas fa-circle"></i></p>
+                                        <p>מתחסנים מנה שניה</p>
+                                    </div>
+                                    <div id="cumulativeNumOfVaccinatedsGraph">
+                                        <h1>--פה יבוא גרף--</h1>
+                                    </div>
+                                </div>
+
+                                <div id="numOfVaccinatedsFromAllPopulation">
+                                    <div class="section2-graphTitle">
+                                        <div><h2>אחוז מתחסנים מכלל האוכלוסייה</h2></div>
+                                        <div class="section2-openMenu">
+                                            <p>חודש אחרון</p>
+                                            <p><i class="fas fa-chevron-down"></i></p>
+                                            <div class="section2-menu">
+                                                <p>עד עכשיו</p>
+                                                <p>שבוע אחרון</p>
+                                                <p>שבועיים אחרונים</p>
+                                                <p>חודש אחרון</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div  class="section2-assembly">
+                                        <p class="darkGreen"><i class="fas fa-circle"></i></p>
+                                        <p>% מתחסנים מנה ראשונה</p>
+                                        <p class="lightGreen"><i class="fas fa-circle"></i></p>
+                                        <p>% מתחסנים מנה שניה</p>
+                                    </div>
+                                    <div id="numOfVaccinatedsFromAllPopulationGraph">
+                                        <h1>--פה יבוא גרף--</h1>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                    </div>
                 </div>
             </div>
             <div class="section3 section">
@@ -129,6 +209,5 @@
     </div>
     
     <script src="./js/app.js"></script>
-    
 </body>
 </html>
