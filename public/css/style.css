@@ -165,9 +165,38 @@ body {
 }
 .section2-openMenu p{
     padding: 8px 16px;
+    font-weight: 700;
 }
 .innerContainer div div.section2-menu{
     display: none;
+}
+.innerContainer div div.toggle {
+    display: block;
+    position: absolute;
+    margin-top: 45px;
+    margin-right: 19.8%;
+    border: solid 1px var(--background-color);
+    background-color: white;
+    font-weight: 700;
+    line-height: 20px;
+    border-radius: 5px;
+    z-index: 100;
+    width: 145px;
+}
+.innerContainer div div.toggle div:hover{
+    background-color: var(--background-color);
+}
+.innerContainer div div div.checked{
+    background-color: #3366FF;
+    color: white;
+}
+.innerContainer div div div.checked:hover{
+    background-color: #5C85FF;
+}
+.innerContainer div div.toggle div {
+    padding: 3px;
+    cursor: pointer;
+    
 }
 .innerContainer div div.section2-assembly{
     padding: 0 24px;

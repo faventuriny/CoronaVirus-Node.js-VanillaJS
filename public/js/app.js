@@ -894,33 +894,39 @@ if(document.querySelector('.index') !== null){
     window.onload = (e) => {
         addEventListenerToHamburger()
         loadSection1()
+        loadSection2()
     }
 }
 
-// add graph to dayly vaccinate
-if(document.querySelector('.index') !== null){
-    document.addEventListener('DOMContentLoaded', ()=>{
-        loadDataForNumOfVaccinate()
-
-    })
+function loadSection2() {
+    let _28days = 28 
+    loadDataForNumOfVaccinate(_28days)
+    loadDataForCumulativeNumOfVaccinate(_28days)
+    loadDataForPercentOfVaccinate(_28days)
 }
-
-function loadDataForNumOfVaccinate(){
+// num of vaccinates
+function loadDataForNumOfVaccinate(period){
     fetch('/vaccine-population')
     .then(response => response.json())
     .then(data => {
+        console.log('section 2 Data', data);
+        
         let y1Data = []
         let y2Data = []
         let dates = []
 
         let n = data.length - 1
 
-        for (let i = n; i > data.length-28; i--) {   
+        if(period === 0 ){
+            period = data.length
+        }
+        for (let i = n; i > data.length-period; i--) {   
             y1Data.unshift(data[i].dailyFirstDose)
             y2Data.unshift(data[i].dailySecDose) 
             dates.unshift(data[i].date[8]+data[i].date[9]+"."+data[i].date[5]+data[i].date[6]) 
         }
         setNumOfVaccinatedGraph(y1Data, y2Data, dates)
+        addEventListenerToPeriodButtonNumOfVaccinated()
     });
 }
 function setNumOfVaccinatedGraph(y1Data, y2Data, dates){
@@ -1028,5 +1034,372 @@ function setNumOfVaccinatedGraph(y1Data, y2Data, dates){
         // }
     })
 }
+function addEventListenerToPeriodButtonNumOfVaccinated(){
+    document.querySelector('#periodButtonNumOfVaccinated').addEventListener('click', (e) => {
+        e.preventDefault()
+        let menu = document.querySelector('#section2MenuNumOfVaccinated')
+        menu.classList.toggle('toggle')
 
+        let ids = ['#untilNowNumOfVaccinated','#lastWeekNumOfVaccinated', '#twolastWeeksNumOfVaccinated', '#lastMonthNumOfVaccinated']
+        let period = [0,7,14,28]
 
+        for(let i = 0 ; i < ids.length ; i++){
+            document.querySelector(ids[i]).addEventListener('click', (e) => {
+                e.preventDefault()
+                loadDataForNumOfVaccinate(period[i])
+                ids.forEach(id => {
+                    document.querySelector(id).classList.remove('checked')
+                })
+                document.querySelector(ids[i]).classList.toggle('checked')
+            })
+        }
+    
+    })
+}
+
+// cumulative number of vaccines
+function loadDataForCumulativeNumOfVaccinate(period){
+    fetch('/vaccine-population')
+    .then(response => response.json())
+    .then(data => {
+        
+        let y1Data = []
+        let y2Data = []
+        let dates = []
+
+        let n = data.length - 1
+
+        if(period === 0 ){
+            period = data.length
+        }
+        for (let i = n; i > data.length-period; i--) {   
+            y1Data.unshift(data[i].totalFirstDose)
+            y2Data.unshift(data[i].totalSecDose) 
+            dates.unshift(data[i].date[8]+data[i].date[9]+"."+data[i].date[5]+data[i].date[6]) 
+        }
+        setNumOfCumulativeVaccinatedGraph(y1Data, y2Data, dates)
+        addEventListenerToPeriodButtonCumulativeNumOfVaccinated()
+    });
+}
+function setNumOfCumulativeVaccinatedGraph(y1Data, y2Data, dates){
+    Highcharts.setOptions({
+        lang: {
+          decimalPoint: '.',
+          thousandsSep: ','
+        },
+        colors: [{
+            linearGradient: {
+              x1: 0,
+              x2: 0,
+              y1: 0,
+              y2: 1
+            },
+            stops: [
+              [0, '#ff3399'],
+              [1, '#3366AA']
+            ]
+          }, {
+            linearGradient: {
+              x1: 0,
+              x2: 0,
+              y1: 0,
+              y2: 1
+            },
+            stops: [
+              [0, '#f03399'],
+              [1, '#bada55']
+            ]
+          }, '#2f8fce', '#C7432B', '#999999', '#DF9239', '#A14A7B'],
+    });
+    Highcharts.chart('cumulativeNumOfVaccinatedsGraph', {
+        chart: {
+            zoomType: 'xy',
+            panning: true,
+            panKey: 'shift',
+            type: 'area',
+            backgroundColor: null,
+            backgroundColor: 'transparent'
+        },
+        credits:{
+            enabled: false
+        },
+        title: {
+            text: 'מספר מתחסנים יומי',
+            style: {
+                color: 'white'
+            }
+        },
+        colors: ['#1c7d7e','#b6ca51'],
+        yAxis: {
+            lineWidth: 1,
+            tickWidth: 1,
+            title: {
+                // text: "מספר מתחסנים",
+                text: 'מספר<br>מתחסנים',
+                align: 'high',
+                textAlign: "right",
+                offset: 0,
+                rotation: 0,
+                y: -30,
+                x: 10,
+                style: {
+                    fontSize: '14px',
+                    fontFamily: 'OpenSans',
+                    textAlign: "right",
+                    // width: '50px'
+                },
+                labels: {
+                    formatter: function () {
+                        return this.value;
+                    }
+                },
+            },
+            tickInterval: 1000000,
+            endOnTick: false,
+
+        },
+        xAxis: {
+            title: {
+                text: 'תאריך',
+                style: {
+                    fontSize: '14px',
+                    fontFamily: 'OpenSans',
+                    textAlign: "right"
+                }
+            },
+            categories: dates,
+            tickInterval: 5,
+        },
+        series: [
+            {
+                name: 'מתחסנים מנה שניה',
+                data: y1Data,
+                color: '#1c7d7e'
+            },
+            {
+                name: 'מתחסנים מנה ראשונה',
+                data: y2Data,
+                color: '#b6ca51',
+            },
+            
+        ],
+        plotOptions: {
+            series: {
+                stacking: 'overlap',
+                lineWidth: 1
+            },
+            area: {
+                // fillColor: {
+                //     linearGradient: { x1: 0, y1: 1, x2: 1, y2: 1},
+                //     stops: [
+                //         [0, '#66a7a8'],
+                //         [1, '#e2eeee'],
+                //     ],
+                // }
+            }
+        },
+        legend: {
+            enabled: false
+        }
+        // tooltip: {
+        //     formatter(){
+        //         let s = `<strong>  </strong> ${this.x}`;
+        //         this.points.forEach(function(point){
+        //             s += `<br> Y is: ${point.y}`
+        //         })
+        //     },
+        //     shared: true,
+        //     backgroundColor: '#333333',
+        //     borderColor: 'red',
+        //     borderRadius: 20,
+        //     followPointer: true,
+        //     style: {
+        //         color: '#ffffff'
+        //     }
+        // }
+    })
+}
+function addEventListenerToPeriodButtonCumulativeNumOfVaccinated(){
+    document.querySelector('#periodButtonCumNumOfVaccinated').addEventListener('click', (e) => {
+        e.preventDefault()
+        let menu = document.querySelector('#section2MenuCumNumOfVaccinated')
+        menu.classList.toggle('toggle')
+
+        let ids = ['#untilNowCumNumOfVaccinated','#lastWeekCumNumOfVaccinated', '#twolastCumWeeksNumOfVaccinated', '#lastMonthCumNumOfVaccinated']
+        let period = [0,7,14,28]
+
+        for(let i = 0 ; i < ids.length ; i++){
+            document.querySelector(ids[i]).addEventListener('click', (e) => {
+                e.preventDefault()
+                loadDataForCumulativeNumOfVaccinate(period[i])
+                ids.forEach(id => {
+                    document.querySelector(id).classList.remove('checked')
+                })
+                document.querySelector(ids[i]).classList.toggle('checked')
+            })
+        }
+    
+    })
+}
+
+//percent of vaccines
+function loadDataForPercentOfVaccinate(period){
+    fetch('/vaccine-population')
+    .then(response => response.json())
+    .then(data => {
+        
+        let y1Data = []
+        let y2Data = []
+        let dates = []
+
+        let n = data.length - 1
+
+        if(period === 0 ){
+            period = data.length
+        }
+        for (let i = n; i > data.length-period; i--) {   
+            y1Data.unshift(data[i].percentFirstDose)
+            y2Data.unshift(data[i].percentSecDose) 
+            dates.unshift(data[i].date[8]+data[i].date[9]+"."+data[i].date[5]+data[i].date[6]) 
+        }
+        setPercentVaccinatedGraph(y1Data, y2Data, dates)
+        addEventListenerToPeriodButtonPercentOfVaccinated()
+    });
+}
+function setPercentVaccinatedGraph(y1Data, y2Data, dates){
+    Highcharts.setOptions({
+        lang: {
+          decimalPoint: '.',
+          thousandsSep: ','
+        },
+    });
+    Highcharts.chart('numOfVaccinatedsFromAllPopulationGraph', {
+        chart: {
+            zoomType: 'xy',
+            panning: true,
+            panKey: 'shift',
+            type: 'line',
+            backgroundColor: null,
+            backgroundColor: 'transparent'
+        },
+        credits:{
+            enabled: false
+        },
+        title: {
+            text: 'מספר מתחסנים יומי',
+            style: {
+                color: 'white'
+            }
+        },
+        colors: ['#1c7d7e','#b6ca51'],
+        yAxis: {
+            lineWidth: 1,
+            tickWidth: 1,
+            title: {
+                // text: "מספר מתחסנים",
+                text: 'מספר<br>מתחסנים',
+                align: 'high',
+                textAlign: "right",
+                offset: 0,
+                rotation: 0,
+                y: -30,
+                x: 10,
+                style: {
+                    fontSize: '14px',
+                    fontFamily: 'OpenSans',
+                    textAlign: "right",
+                    // width: '50px'
+                },
+                labels: {
+                    formatter: function () {
+                        return this.value + '%';
+                    }
+                },
+            },
+            tickInterval: 1000000,
+            endOnTick: false,
+
+        },
+        xAxis: {
+            title: {
+                text: 'תאריך',
+                style: {
+                    fontSize: '14px',
+                    fontFamily: 'OpenSans',
+                    textAlign: "right"
+                }
+            },
+            categories: dates,
+            tickInterval: 5,
+        },
+        series: [
+            {
+                name: 'מתחסנים מנה שניה',
+                data: y1Data,
+                color: '#1c7d7e'
+            },
+            {
+                name: 'מתחסנים מנה ראשונה',
+                data: y2Data,
+                color: '#b6ca51',
+            },
+            
+        ],
+        plotOptions: {
+            series: {
+                stacking: 'overlap',
+                lineWidth: 1
+            },
+            area: {
+                // fillColor: {
+                //     linearGradient: { x1: 0, y1: 1, x2: 1, y2: 1},
+                //     stops: [
+                //         [0, '#66a7a8'],
+                //         [1, '#e2eeee'],
+                //     ],
+                // }
+            }
+        },
+        legend: {
+            enabled: false
+        }
+        // tooltip: {
+        //     formatter(){
+        //         let s = `<strong>  </strong> ${this.x}`;
+        //         this.points.forEach(function(point){
+        //             s += `<br> Y is: ${point.y}`
+        //         })
+        //     },
+        //     shared: true,
+        //     backgroundColor: '#333333',
+        //     borderColor: 'red',
+        //     borderRadius: 20,
+        //     followPointer: true,
+        //     style: {
+        //         color: '#ffffff'
+        //     }
+        // }
+    })
+}
+function addEventListenerToPeriodButtonPercentOfVaccinated(){
+    document.querySelector('#periodButtonPrecentOfVaccinated').addEventListener('click', (e) => {
+        e.preventDefault()
+        let menu = document.querySelector('#section2MenuPercentOfVaccinated')
+        menu.classList.toggle('toggle')
+
+        let ids = ['#untilNowPercentOfVaccinated','#lastWeekPercentVaccinated', '#twolastWeeksPercentOfVaccinated', '#lastMonthPercentOfVaccinated']
+        let period = [0,7,14,28]
+
+        for(let i = 0 ; i < ids.length ; i++){
+            document.querySelector(ids[i]).addEventListener('click', (e) => {
+                e.preventDefault()
+                loadDataForPercentOfVaccinate(period[i])
+                ids.forEach(id => {
+                    document.querySelector(id).classList.remove('checked')
+                })
+                document.querySelector(ids[i]).classList.toggle('checked')
+            })
+        }
+    
+    })
+}
