@@ -347,18 +347,27 @@ body {
     background-color: var(--green);
 }
 
+
+
+
 .section4 {
     grid-template-columns: 1fr 1fr 1fr;
+    display: none;
 }
 .section4 .container {
     height: 52vw;
 }
 .section5 {
+    display: none;
     grid-template-columns: 1fr 1fr 1fr;
 }
 .section5 .container {
     height: 23vw;
 }
+
+
+
+
 .section6 {
     grid-template-columns: 66.6667% 33.3333% ;
 }
@@ -428,7 +437,12 @@ body {
     background-color: var(--table-title-color);
     display: flex;
     align-items: center;
+    justify-content: center;
 }
+#tableTrafficTitle .trafficCityDiv{
+    justify-content: right;
+}
+
 #tableTrafficTitle .title button {
     background-color: var(--table-title-color);
     border: none;
@@ -439,9 +453,27 @@ body {
 }
 #tableTraffic .item {
     border-bottom: 1px solid var(--table-title-color);
-    padding: 10px;
+    padding: 5px;
     display: flex;
     align-items: center;
+    justify-content: center;
+}
+#tableTraffic .item-title{
+    justify-content: right;
+}
+#tableTraffic .item-score{
+    font-weight: 700;
+    text-decoration: underline;
+}
+#tableTraffic .item-score span {
+    width: 24px;
+    height: 22px;
+    border-radius: 2px;
+    text-align: center;
+    font-size: 0.85rem;
+}
+#tableTraffic .item p {
+    font-size: 0.85rem;
 }
 #tableTraffic h2 {
     margin: 0;

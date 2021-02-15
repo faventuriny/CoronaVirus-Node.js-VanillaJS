@@ -896,6 +896,7 @@ if(document.querySelector('.index') !== null){
         loadSection1()
         loadSection2()
         loadSection3()
+        loadSection6()
     }
 }
 
@@ -1563,10 +1564,12 @@ function addEventListenerToSearchInput(data) {
         }
     })
 }
-
+function loadSection6() {
+    loadDataForTrafficLightPlan()
+}
 // table traffic light plan
 function loadDataForTrafficLightPlan() {
-    fetch('/vaccination-by-city')
+    fetch('/traffic-light-plan')
     .then(response => response.json())
     .then(data => {
         setTableTrafficLightPlan(data)
@@ -1574,15 +1577,19 @@ function loadDataForTrafficLightPlan() {
 }
 function setTableTrafficLightPlan(data) {
     // create header
-    let containerTitle = document.querySelector('#tableVaccinationByCityTitle')
-    let headerList = ['ישוב','% מתחסנים מנה ראשנה','% מתחסנים מנה שנייה','חולים פעילים','חולים פעילים לכל 10,000 נפש','ציון יומי ממוחשב',]
-    let idList = ['cityButton', 'firstDoseVaccinateButton', 'secDoseVaccinateButton', 'activePatienteButton','patiente10KButton', 'scoreButton']
+    let containerTitle = document.querySelector('#tableTrafficTitle')
+    let headerList = ['ישוב','ציון וצבע יומי','חולים חדשים לכל 10,000 נפש *','% הבדיקות החיוביות *','שיעור שינוי מאומתים *','חולים פעילים',]
+    let idList = ['trafficCityButton', 'trafficScore', 'traffic10K', 'trafficPercentagePositiveTest','verifiedRateOfChange', 'trafficActivePatients']
 
 
     for(let i = 0 ; i < headerList.length ; i++){
         let div = document.createElement('div')
         div.classList.add('title')
         containerTitle.appendChild(div)
+
+        if(i === 0){
+            div.classList.add('trafficCityDiv')
+        }
 
         let button = document.createElement('button')
         button.id = idList[i]
@@ -1592,68 +1599,64 @@ function setTableTrafficLightPlan(data) {
   
 
     //create table
-    let container = document.querySelector('#tableVaccinationByCity')
+    let container = document.querySelector('#tableTraffic')
     data.forEach((obj) => {
         //city
         let div = document.createElement('div')
         div.classList.add('item')
+        div.classList.add('item-title')
         container.appendChild(div)
 
         let h2 = document.createElement('h2')
         h2.innerHTML = obj.city
         div.appendChild(h2)
+       
+        //score
+        let divScore = document.createElement('div')
+        divScore.classList.add('item')
+        divScore.classList.add('item-score')
+        container.appendChild(divScore)
 
-        //vaccine first dose
-        let divFirstDoseContainer = document.createElement('div')
-        divFirstDoseContainer.classList.add('divDoseContainer')
-        divFirstDoseContainer.classList.add('item')
-        container.appendChild(divFirstDoseContainer)
+        let spanScore = document.createElement('span')
+        spanScore.innerHTML = obj.score
+        divScore.appendChild(spanScore)
 
-        let div1DoseProgress = document.createElement('div')
-        div1DoseProgress.classList.add('progress')
-        divFirstDoseContainer.appendChild(div1DoseProgress)
+        if(obj.score > 7.5){
+            spanScore.classList.add('red')
+        } else if (obj.score < 7.5 && obj.score > 6 ){
+            spanScore.classList.add('orange')
+        } else if (obj.score < 6 && obj.score > 4.5 ){
+            spanScore.classList.add('yellow')
+        } else {
+            spanScore.classList.add('green')
+        }
 
-        let div1DoseProgressLeft = document.createElement('div')
-        div1DoseProgress.appendChild(div1DoseProgressLeft)
+        //active patients for 10K
+        let divActivePat10K = document.createElement('div')
+        divActivePat10K.classList.add('item')
+        container.appendChild(divActivePat10K)
 
-        let div1DoseProgressRight = document.createElement('div')
-        div1DoseProgressRight.style.width = obj.firstDose +'%'
-        div1DoseProgressRight.style.height = '10px'
-        div1DoseProgressRight.classList.add('firstDoseProgressRight')
-        div1DoseProgress.appendChild(div1DoseProgressRight)
+        let pActivePat10K = document.createElement('p')
+        pActivePat10K.innerHTML = obj.newInfectedsFor10KPeople
+        divActivePat10K.appendChild(pActivePat10K)
 
-        let div1DosePercent = document.createElement('div')
-        divFirstDoseContainer.appendChild(div1DosePercent)
+        //Percentage of positive tests
+        let divPercentagePositiveTests = document.createElement('div')
+        divPercentagePositiveTests.classList.add('item')
+        container.appendChild(divPercentagePositiveTests)
 
-        let p1Dose = document.createElement('p')
-        p1Dose.innerHTML = obj.firstDose + '%'
-        div1DosePercent.appendChild(p1Dose)
+        let pPercentagePositiveTests = document.createElement('p')
+        pPercentagePositiveTests.innerHTML = obj.positiveTestPercentage + '%'
+        divPercentagePositiveTests.appendChild(pPercentagePositiveTests)
 
-        //vaccine secound dose
-        let divSecDoseContainer = document.createElement('div')
-        divSecDoseContainer.classList.add('item')
-        divSecDoseContainer.classList.add('divDoseContainer')
-        container.appendChild(divSecDoseContainer)
+        //verified Change Rate
+        let divVerifiedChangeRate = document.createElement('div')
+        divVerifiedChangeRate.classList.add('item')
+        container.appendChild(divVerifiedChangeRate)
 
-        let div2DoseProgress = document.createElement('div')
-        div2DoseProgress.classList.add('progress')
-        divSecDoseContainer.appendChild(div2DoseProgress)
-
-        let div2DoseProgressLeft = document.createElement('div')
-        div2DoseProgress.appendChild(div2DoseProgressLeft)
-
-        let div2DoseProgressRight = document.createElement('div')
-        div2DoseProgressRight.style.width = obj.secoundDose +'%'
-        div2DoseProgressRight.style.height = '10px'
-        div2DoseProgressRight.classList.add('secDoseProgressRight')
-        div2DoseProgress.appendChild(div2DoseProgressRight)
-
-        let div2DosePercent = document.createElement('div')
-        divSecDoseContainer.appendChild(div2DosePercent)
-
-        let p2Dose = document.createElement('p')
-        p2Dose.innerHTML = obj.secoundDose + '%'
-        div2DosePercent.appendChild(p2Dose)
+        let pVerifiedChangeRate = document.createElement('p')
+        pVerifiedChangeRate.innerHTML = obj.verifiedChangeRate  + '%'
+        divVerifiedChangeRate.appendChild(pVerifiedChangeRate)
 
         //active patients
         let divActivePatients = document.createElement('div')
@@ -1664,33 +1667,9 @@ function setTableTrafficLightPlan(data) {
         pActivePatients.innerHTML = obj.activePatients
         divActivePatients.appendChild(pActivePatients)
 
-        //active patients for 10K
-        let divActivePat10K = document.createElement('div')
-        divActivePat10K.classList.add('item')
-        container.appendChild(divActivePat10K)
+        
 
-        let pActivePat10K = document.createElement('p')
-        pActivePat10K.innerHTML = obj.activePatientsFor10K
-        divActivePat10K.appendChild(pActivePat10K)
-
-        //score
-        let divScore = document.createElement('div')
-        divScore.classList.add('item')
-        container.appendChild(divScore)
-
-        let spanScore = document.createElement('span')
-        spanScore.innerHTML = obj.CalDailyScore
-        divScore.appendChild(spanScore)
-
-        if(obj.CalDailyScore > 7.5){
-            spanScore.classList.add('red')
-        } else if (obj.CalDailyScore < 7.5 && obj.CalDailyScore > 6 ){
-            spanScore.classList.add('orange')
-        } else if (obj.CalDailyScore < 6 && obj.CalDailyScore > 4.5 ){
-            spanScore.classList.add('yellow')
-        } else {
-            spanScore.classList.add('green')
-        }
+        
         addEventListenerToSearchTrafficLightPlan(data)
     })
 
@@ -1709,12 +1688,12 @@ function addEventListenerToSearchTrafficLightPlan(data) {
         })
         console.log('foundCities', foundCities);
 
-        document.querySelector('#tableVaccinationByCityTitle').innerHTML = ''
-        document.querySelector('#tableVaccinationByCity').innerHTML = ''
+        document.querySelector('#tableTrafficTitle').innerHTML = ''
+        document.querySelector('#tableTraffic').innerHTML = ''
         if(foundCities.length === 0){
-            setTableVaccination(data)
+            setTableTrafficLightPlan(data)
         } else {
-            setTableVaccination(foundCities)
+            setTableTrafficLightPlan(foundCities)
         }
     })
 }
