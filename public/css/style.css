@@ -4,6 +4,11 @@
     --light-green: #b6ca51;
     --divider-color: #d8d8d9;
     --menu-background-color: #F7F9FC;
+    --table-title-color: #E6F1F3;
+    --red: #fa9e8f;
+    --orange: #f2c580;
+    --yellow: #fcfc70;
+    --green: #b8de92;
 }
 @font-face{
     font-family: 'OpenSans';
@@ -213,13 +218,135 @@ body {
 #numOfVaccinatedsFromAllPopulationGraph{
     height: 257px;
 }
-
 .section3{
     grid-template-columns: 66.6667% 33.3333%;
 }
 .section3 .container{
     height: 23vw;
 }
+.section3 .innerContainer  {
+    overflow: hidden;
+}
+.section3 .innerContainer div  {
+    padding: 0;
+}
+.section3 .innerContainer .section3-first-section{
+    padding: 16px 24px;
+}
+.section3-first-section{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.innerContainer div.search{
+    border: 1px solid var(--background-color);
+    border-radius: 30px;
+    width: 170px;
+    height: 34px;
+    padding: 0;
+}
+.innerContainer div.search form{
+    display: flex;
+    align-items: center;
+    padding-right: 20px;
+    height: 100%;
+    width: 100%;
+}
+.search input{
+    border: none;
+    margin-right: 10px;
+    font-size: 1rem; 
+    font-family: 'OpenSans'; 
+    font-weight: 100;
+    color: gray;
+}
+.search input:focus{
+    border: none;
+    outline: none;  
+}
+.search ::placeholder {
+    color: var(--divider-color);
+    opacity: 1; /* Firefox */
+  }
+  
+.search :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: var(--divider-color);
+  }
+  
+.search ::-ms-input-placeholder { /* Microsoft Edge */
+    color: var(--divider-color);
+  }
+  .search svg{
+    width: 20px;
+    height: 20px; 
+    color: black;
+}
+#tableVaccinationByCityTitle,
+#tableVaccinationByCity{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    padding: 0 1px;
+}
+#tableVaccinationByCity{
+    overflow: hidden;
+    overflow-y: scroll;
+    height: 200px;
+}
+#tableVaccinationByCityTitle .title {
+    background-color: var(--table-title-color);
+    display: flex;
+    align-items: center;
+}
+#tableVaccinationByCityTitle .title button {
+    background-color: var(--table-title-color);
+    border: none;
+    font-size: 0.9rem;
+    font-family: 'OpenSans'; 
+    outline: none;
+    cursor: pointer;
+}
+#tableVaccinationByCity .item {
+    border-bottom: 1px solid var(--table-title-color);
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+#tableVaccinationByCity h2 {
+    margin: 0;
+}
+#tableVaccinationByCity .divDoseContainer{
+    display: flex;
+}
+#tableVaccinationByCity .progress{
+    background-color: var(--background-color);
+    width: 38px;
+    height: 10px;
+    margin-left: 20px;
+}
+#tableVaccinationByCity .firstDoseProgressRight{
+    background-color: var(--dark-green);
+}
+#tableVaccinationByCity .secDoseProgressRight{
+    background-color: var(--light-green);
+}
+#tableVaccinationByCity span {
+    padding: 0 5px;
+    font-size: 0.75rem;
+}
+.red{
+    background-color: var(--red);
+}
+.orange{
+    background-color: var(--orange);
+}
+.yellow{
+    background-color: var(--yellow);
+}
+.green{
+    background-color: var(--green);
+}
+
 .section4 {
     grid-template-columns: 1fr 1fr 1fr;
 }
@@ -238,6 +365,127 @@ body {
 .section6 .container {
     height: 24vw;
 }
+.section6 .innerContainer  {
+    overflow: hidden;
+}
+.section6 .innerContainer div  {
+    padding: 0;
+}
+.section6 .innerContainer .section6-first-section{
+    padding: 16px 24px;
+}
+.section6-first-section{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.section6 .innerContainer .section6-first-section-dates{
+    background-color: var(--table-title-color);
+    padding: 3px;
+    border-radius: 3px;
+}
+.section6-first-section-search-area{
+    display: flex;
+    align-items: center;
+}
+.section6-first-section-sec-title{
+    font-weight: 700;
+}
+.section6 .innerContainer .section6-sec-section {
+    display: flex;
+    padding: 0 14px;
+}
+.section6-sec-section .square{
+    width: 32px;
+    height: 32px;
+    border-radius: 3px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.section6-sec-section p {
+    font-size: 0.9rem;
+}
+.section6-sec-section span {
+    font-size: 1rem;
+    color: var(--divider-color);
+    font-family: 'OpenSans';
+    font-style: italic;
+}
+
+
+#tableTrafficTitle,
+#tableTraffic{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    padding: 0 1px;
+}
+#tableTraffic{
+    overflow: hidden;
+    overflow-y: scroll;
+    height: 200px;
+}
+#tableTrafficTitle .title {
+    background-color: var(--table-title-color);
+    display: flex;
+    align-items: center;
+}
+#tableTrafficTitle .title button {
+    background-color: var(--table-title-color);
+    border: none;
+    font-size: 0.9rem;
+    font-family: 'OpenSans'; 
+    outline: none;
+    cursor: pointer;
+}
+#tableTraffic .item {
+    border-bottom: 1px solid var(--table-title-color);
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+#tableTraffic h2 {
+    margin: 0;
+}
+#tableTraffic .divDoseContainer{
+    display: flex;
+}
+#tableTraffic .progress{
+    background-color: var(--background-color);
+    width: 38px;
+    height: 10px;
+    margin-left: 20px;
+}
+#tableTraffic .firstDoseProgressRight{
+    background-color: var(--dark-green);
+}
+#tableTraffic .secDoseProgressRight{
+    background-color: var(--light-green);
+}
+#tableTraffic span {
+    padding: 0 5px;
+    font-size: 0.75rem;
+}
+#tableTraffic .red{
+    background-color: var(--red);
+}
+#tableTraffic .orange{
+    background-color: var(--orange);
+}
+#tableTraffic .yellow{
+    background-color: var(--yellow);
+}
+#tableTraffic .green{
+    background-color: var(--green);
+}
+
+
+
+
+
+
+
+
+
 .section7 {
     grid-template-columns: 41.6667% 33.3333% 25%;
 }
