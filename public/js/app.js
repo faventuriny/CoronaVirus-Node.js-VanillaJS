@@ -898,6 +898,7 @@ function returnNumberWithComma(num) {
 if(document.querySelector('.index') !== null){
     window.onload = (e) => {
         addEventListenerToHamburger()
+        addEventListenerToAccessiblityButton()
         loadSection1()
         loadSection2()
         loadSection3()
@@ -1099,6 +1100,7 @@ function setNumOfCumulativeVaccinatedGraph(y1Data, y2Data, dates){
     Highcharts.chart('cumulativeNumOfVaccinatedsGraph', {
         chart: {
             type: 'area',
+            backgroundColor: 'transparent'
         },
         credits:{
             enabled: false
@@ -1524,6 +1526,7 @@ function setTableVaccination(data) {
         let spanScore = document.createElement('span')
         spanScore.innerHTML = obj.CalDailyScore
         divScore.appendChild(spanScore)
+        spanScore.classList.add('spanScore')
 
         if(obj.CalDailyScore > 7.5){
             spanScore.classList.add('red')
@@ -1617,6 +1620,7 @@ function setTableTrafficLightPlan(data) {
         let spanScore = document.createElement('span')
         spanScore.innerHTML = obj.score
         divScore.appendChild(spanScore)
+        divScore.classList.add('divScore')
 
         if(obj.score > 7.5){
             spanScore.classList.add('red')
@@ -1708,7 +1712,7 @@ function loadDataForHospitalStatus() {
 function setTableHospitalStatus(data) {
     // create header
     let containerTitle = document.querySelector('#tableHospitalStatusTitle')
-    let headerList = ['בית חולים','% תפוסה כללי','% תפוסה קורונה','אנשי צוות מאומתים ובבידוד']
+    let headerList = ['בית חולים','% תפוסה כללי','% תפוסה קורונה','אנשי צוות מאומתים<br>ובבידוד']
     let idList = ['hospitalName', 'occupancyRate', 'occupancyCorona', 'staffInIsolation']
 
 
@@ -1803,4 +1807,70 @@ function setTableHospitalStatus(data) {
         divStaff.appendChild(pStaff)
     })
 
+}
+
+//accessiblity button
+function addEventListenerToAccessiblityButton() {
+    document.querySelector('#accessiblityButton').addEventListener('click', (e) => {
+        e.preventDefault()
+
+
+        let header = document.querySelector('.header')
+        header.classList.toggle('headerAccessible')
+
+        let accessiblityButton = document.querySelector('#accessiblityButton')
+        accessiblityButton.classList.toggle('accessiblityPressed')
+
+        let general = document.querySelector('.general')
+        general.classList.toggle('generalAccessiblity')
+
+        let dates = document.querySelector('.section6-first-section-dates')
+        dates.classList.toggle('section6-first-section-dates-accessible')
+
+        let graphIcon = document.querySelectorAll('.graphIcon')
+        graphIcon.forEach((container) => {
+            container.classList.toggle('graphIconAccessible')
+        })
+        let innerContainers = document.querySelectorAll('.innerContainer')
+        innerContainers.forEach((container) => {
+            container.classList.toggle('innerContainerAccessiblity')
+        })
+        let openMenu = document.querySelectorAll('.section2-openMenu')
+        openMenu.forEach((container) => {
+            container.classList.toggle('section2-openMenuAccessible')
+        })
+        let title = document.querySelectorAll('.title')
+        title.forEach((container) => {
+            container.classList.toggle('titleAccessible')
+        })
+        let input = document.querySelectorAll('input')
+        input.forEach((container) => {
+            container.classList.toggle('searchAccessible')
+        })
+        let firstDoseProgressRight = document.querySelectorAll('.firstDoseProgressRight')
+        firstDoseProgressRight.forEach((container) => {
+            container.classList.toggle('firstDoseProgressRightAccessible')
+        })
+        let secDoseProgressRight = document.querySelectorAll('.secDoseProgressRight')
+        secDoseProgressRight.forEach((container) => {
+            container.classList.toggle('secDoseProgressRightAccessible')
+        })
+        let progress = document.querySelectorAll('.progress')
+        progress.forEach((container) => {
+            container.classList.toggle('progressAccessible')
+        })
+        let spanScore = document.querySelectorAll('.spanScore')
+        spanScore.forEach((container) => {
+            container.classList.toggle('spanScoreAccessible')
+        })
+        let divScore = document.querySelectorAll('.divScore')
+        divScore.forEach((container) => {
+            container.classList.toggle('divScoreAccessible')
+        })
+
+        let occupancyProgressRight = document.querySelectorAll('.occupancyProgressRight')
+        occupancyProgressRight.forEach((container) => {
+            container.classList.toggle('occupancyProgressRightAccessible')
+        })
+    })
 }

@@ -27,6 +27,9 @@
     box-shadow: 0 1px 20px 2px #dce1e7; 
     z-index: 200;
 }
+.headerAccessible{
+    box-shadow: 0 1px 20px 2px #2a3b47; 
+}
 .line{
     height: 2px;
     background-image: linear-gradient(90deg,#4bb887,#16b6d0,#d6e58a);
@@ -109,6 +112,13 @@
     border-radius: 50px;
     padding: 5px 15px;
     font-family: OpenSans, Helvetica, sans-serif;
+    outline: none;
+    cursor: pointer;
+}
+button.accessiblityPressed{
+    background-color: #d8d8d8;
+    border-color: #d8d8d8;
+    color: #39475d;
 }
 
 .all-divs{

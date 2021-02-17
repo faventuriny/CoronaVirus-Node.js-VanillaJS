@@ -10,6 +10,12 @@
     --orange: #f2c580;
     --yellow: #fcfc70;
     --green: #b8de92;
+    --accessiblity-blue: #49667a;
+    --accessiblity-dark-blue: #384F5F;
+    --accessiblity-dark-dark-blue: #2a3b47;
+    --accessiblity-green: #9ffa82;
+    --accessiblity-red: #fd8264;
+    --accessible-light-blue: #2cd2db;
 }
 @font-face{
     font-family: 'OpenSans';
@@ -44,8 +50,10 @@ body {
     background-color: var(--background-color);
     width: 100%;
 }
+.generalAccessiblity{
+    background-color: var(--accessiblity-blue);
+}
 .section{
-    background-color: var(--background-color);
     display: grid;
     margin-right: -15px;
     margin-left: -15px;
@@ -80,6 +88,10 @@ body {
     width: 100%;
     height: 100%;
     border-radius: 10px;
+}
+.innerContainerAccessiblity{
+    background-color: var(--accessiblity-dark-blue);
+    color: white;
 }
 .innerContainer div {
     padding: 15px;
@@ -140,6 +152,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.graphIconAccessible {
+    background-color: #2c3a46;
 }
 .section1 .innerContainer div div.innerGraphIcon{
     width: 20px;
@@ -218,6 +233,9 @@ body {
     border-radius: 20px;
     background-color: var(--menu-background-color);
     width: 145px;
+}
+.section2-graphTitle .section2-openMenuAccessible {
+    background-color: var(--accessiblity-dark-blue);
 }
 .section2-openMenu p{
     padding: 8px 16px;
@@ -304,7 +322,7 @@ body {
     height: 100%;
     width: 100%;
 }
-.search input{
+input{
     border: none;
     margin-right: 10px;
     font-size: 1rem; 
@@ -312,6 +330,10 @@ body {
     font-weight: 100;
     color: gray;
 }
+.searchAccessible{
+    background-color: var(--accessiblity-dark-blue);
+}
+
 .search input:focus{
     border: none;
     outline: none;  
@@ -344,23 +366,29 @@ body {
     overflow-y: scroll;
     height: 100%;
 }
-#tableVaccinationByCityTitle .title {
+.title {
     background-color: var(--table-title-color);
     display: flex;
     align-items: center;
     justify-content: center;
 }
+.titleAccessible {
+    background-color: var(--accessiblity-dark-dark-blue);
+}
 #tableVaccinationByCityTitle .vaccineCityDiv{
     justify-content: right;
 }
-
-#tableVaccinationByCityTitle .title button {
+.title button {
     background-color: var(--table-title-color);
     border: none;
     font-size: 0.9rem;
     font-family: 'OpenSans'; 
     outline: none;
     cursor: pointer;
+}
+.titleAccessible button {
+    background-color: var(--accessiblity-dark-dark-blue);
+    color: white;
 }
 #tableVaccinationByCity .item {
     border-bottom: 1px solid var(--table-title-color);
@@ -378,21 +406,35 @@ body {
 #tableVaccinationByCity .divDoseContainer{
     display: flex;
 }
-#tableVaccinationByCity .progress{
+.progress{
     background-color: var(--background-color);
     width: 38px;
     height: 10px;
     margin-left: 20px;
 }
-#tableVaccinationByCity .firstDoseProgressRight{
+.progressAccessible {
+    background-color: var(--accessiblity-dark-dark-blue);
+}
+.firstDoseProgressRight{
     background-color: var(--dark-green);
 }
-#tableVaccinationByCity .secDoseProgressRight{
+.firstDoseProgressRightAccessible{
+    background-color: var(--accessiblity-green);
+}
+.secDoseProgressRight{
     background-color: var(--light-green);
 }
-#tableVaccinationByCity span {
-    padding: 0 5px;
+.secDoseProgressRightAccessible{
+    background-color: var(--accessiblity-red);
+}
+.spanScore{
+    padding: 2px 4px;
     font-size: 0.75rem;
+    border-radius: 3px;
+    font-weight: 700;
+}
+.spanScoreAccessible{
+    color: black;
 }
 .red{
     background-color: var(--red);
@@ -448,10 +490,16 @@ body {
     justify-content: space-between;
     align-items: center;
 }
-.section6 .innerContainer .section6-first-section-dates{
+.section6 .innerContainer div .section6-first-section-dates{
+    padding: 5px;
+}
+.section6-first-section-dates{
     background-color: var(--table-title-color);
-    padding: 3px;
     border-radius: 3px;
+    margin-left: 10px;
+}
+.section6-first-section-dates-accessible{
+    background-color: var(--accessiblity-dark-dark-blue) !important;
 }
 .section6-first-section-search-area{
     display: flex;
@@ -474,11 +522,19 @@ body {
 .section6-sec-section p {
     font-size: 0.9rem;
 }
-.section6-sec-section span {
+.squareDescriptions{
+    color: #9AA1A7;
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+.divScore {
     font-size: 1rem;
     color: var(--divider-color);
     font-family: 'OpenSans';
-    font-style: italic;
+}
+.divScoreAccessible{
+    color: black;
 }
 #tableTrafficTitle,
 #tableTraffic{
@@ -491,23 +547,8 @@ body {
     overflow-y: scroll;
     height: 100%;
 }
-#tableTrafficTitle .title {
-    background-color: var(--table-title-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 #tableTrafficTitle .trafficCityDiv{
     justify-content: right;
-}
-
-#tableTrafficTitle .title button {
-    background-color: var(--table-title-color);
-    border: none;
-    font-size: 0.9rem;
-    font-family: 'OpenSans'; 
-    outline: none;
-    cursor: pointer;
 }
 #tableTraffic .item {
     border-bottom: 1px solid var(--table-title-color);
@@ -519,16 +560,16 @@ body {
 #tableTraffic .item-title{
     justify-content: right;
 }
-#tableTraffic .item-score{
-    font-weight: 700;
-    text-decoration: underline;
-}
-#tableTraffic .item-score span {
+.item-score span {
     width: 24px;
     height: 22px;
     border-radius: 2px;
     text-align: center;
     font-size: 0.85rem;
+    color: black;
+    font-weight: 700;
+    text-decoration: underline;
+
 }
 #tableTraffic .item p {
     font-size: 0.85rem;
@@ -596,22 +637,8 @@ body {
     overflow-y: scroll;
     height: 100%;
 }
-#tableHospitalStatusTitle .title {
-    background-color: var(--table-title-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 #tableHospitalStatusTitle .firstTitle{
     justify-content: right;
-}
-#tableHospitalStatusTitle .title button {
-    background-color: var(--table-title-color);
-    border: none;
-    font-size: 0.9rem;
-    font-family: 'OpenSans'; 
-    outline: none;
-    cursor: pointer;
 }
 #tableHospitalStatus .item {
     border-bottom: 1px solid var(--table-title-color);
@@ -629,14 +656,11 @@ body {
 #tableHospitalStatus .divDoseContainer{
     display: flex;
 }
-#tableHospitalStatus .progress{
-    background-color: var(--background-color);
-    width: 38px;
-    height: 10px;
-    margin-left: 20px;
-}
-#tableHospitalStatus .occupancyProgressRight{
+.occupancyProgressRight{
     background-color: var(--light-blue);
+}
+.occupancyProgressRightAccessible{
+    background-color: var(--accessible-light-blue);
 }
 
 @media only screen and (max-width: 1400px) {
