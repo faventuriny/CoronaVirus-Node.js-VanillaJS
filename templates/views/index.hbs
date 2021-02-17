@@ -26,22 +26,24 @@
                     </div>
                 </div>
                 <div class="container">
-                    <div class="innerContainer">
+                    <div class="innerContainer innerContainerActivePatients">
                         <div id="activePatients">  
                             <h2>חולים פעילים</h2>
                         </div>
+                        <div id="activePatientsDistribution"></div>
                     </div>
                 </div>
                 <div class="container">
-                    <div class="innerContainer">
+                    <div class="innerContainer innerContainerSeriouslyIll">
                         <div id="seriouslyIll">  
                             <h2>חולים קשה</h2>
                         </div>
+                        <div id="seriouslyIllDistribution"></div>
                     </div>
                 </div>
                 <div class="container">
                     <div class="innerContainer">
-                        <div>
+                        <div id="vaccineContainer">
                             <div id="vaccinDose1">  
                                 <h2>מתחסנים מנה ראשונה</h2>
                             </div>
@@ -53,16 +55,24 @@
                     </div>
                 </div>
                 <div class="container">
-                    <div class="innerContainer">
+                    <div class="innerContainer innerContainerDeceased">
                         <div id="deceased">  
                             <h2>נפטרים מצטבר</h2>
+                        </div>
+                        <div class="graphIconContainer">
+                            <div class="graphIcon"><div class="innerGraphIcon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" class="eva eva-bar-chart-2" fill="currentColor"><g data-name="Layer 2"><g data-name="bar-chart-2"><rect width="24" height="24" transform="rotate(90 12 12)" opacity="0"></rect><path d="M12 8a1 1 0 0 0-1 1v11a1 1 0 0 0 2 0V9a1 1 0 0 0-1-1z"></path><path d="M19 4a1 1 0 0 0-1 1v15a1 1 0 0 0 2 0V5a1 1 0 0 0-1-1z"></path><path d="M5 12a1 1 0 0 0-1 1v7a1 1 0 0 0 2 0v-7a1 1 0 0 0-1-1z"></path></g></g></svg></div></div>
+                            <div><h3 class="graphDescription">מגמת שינוי יומית</h3></div>
                         </div>
                     </div>
                 </div>
                 <div class="container">
-                    <div class="innerContainer">
+                    <div class="innerContainer innerContainerTestPercentage">
                         <div id="testPercentage">  
                             <h2>אחוז בדיקות חיוביות אתמול</h2>
+                        </div>
+                        <div class="graphIconContainer">
+                            <div class="graphIcon"><div class="innerGraphIcon"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" class="eva eva-bar-chart-2" fill="currentColor"><g data-name="Layer 2"><g data-name="bar-chart-2"><rect width="24" height="24" transform="rotate(90 12 12)" opacity="0"></rect><path d="M12 8a1 1 0 0 0-1 1v11a1 1 0 0 0 2 0V9a1 1 0 0 0-1-1z"></path><path d="M19 4a1 1 0 0 0-1 1v15a1 1 0 0 0 2 0V5a1 1 0 0 0-1-1z"></path><path d="M5 12a1 1 0 0 0-1 1v7a1 1 0 0 0 2 0v-7a1 1 0 0 0-1-1z"></path></g></g></svg></div></div>
+                            <div><h3 class="graphDescription">בדיקות יומיות</h3></div>
                         </div>
                     </div>
                 </div>
@@ -254,7 +264,13 @@
             </div>
             <div class="section7 section">
                 <div class="container lf">
-                    <div class="innerContainer"></div>
+                    <div class="innerContainer">
+                        <div class="section7-firest-section">
+                            <h2>סטטוס בתי חולים</h2>
+                        </div>
+                        <div id="tableHospitalStatusTitle"></div>
+                        <div id="tableHospitalStatus"></div>
+                    </div>
                 </div>
                 <div class="container cr">
                     <div class="innerContainer"></div>

@@ -679,6 +679,7 @@ function addEventListenerToHamburger(){
         changeHamburgerIcon();
     })
 }
+//load first section
 function loadSection1(){
     console.log('fetch');
     
@@ -727,7 +728,7 @@ function loadNewInfected(data) {
 }
 function loadActivePatients(data) {
     let activePatientsDiv = document.querySelector('#activePatients')
-    
+
     let h1 = document.createElement('h1')
     h1.innerHTML = returnNumberWithComma(data.activePatients) 
     activePatientsDiv.appendChild(h1)
@@ -744,10 +745,11 @@ function loadActivePatients(data) {
     p2.innerHTML = 'מחצות'
     div1.appendChild(p2)
 
+    let activePatientsDistributionDiv = document.querySelector('#activePatientsDistribution')
     let div2 = document.createElement('div')
     div2.classList.add('activePatGrid')
     div2.classList.add('part3')
-    activePatientsDiv.appendChild(div2)
+    activePatientsDistributionDiv.appendChild(div2)
 
     let p3 = document.createElement('p')
     p3.innerHTML = 'בית / קהילה'
@@ -794,10 +796,11 @@ function loadSeriouslyIll(data) {
     p2.innerHTML = 'מחצות'
     div1.appendChild(p2)
 
+    let seriouslyIllDistribution = document.querySelector('#seriouslyIllDistribution')
     let div2 = document.createElement('div')
     div2.classList.add('criticalAndRespiratory')
     div2.classList.add('part3')
-    newInfectedDiv.appendChild(div2)
+    seriouslyIllDistribution.appendChild(div2)
 
     let div3 = document.createElement('div')
     div2.appendChild(div3)
@@ -807,7 +810,7 @@ function loadSeriouslyIll(data) {
 
     let p3_1 = document.createElement('p')
     p3_1.innerHTML = '<i class="fas fa-circle"></i>'//עיגול
-    p3_1.classList.add('red')
+    p3_1.classList.add('redDot')
     div3.appendChild(p3_1)
     
     let p3_2 = document.createElement('p')
@@ -821,7 +824,7 @@ function loadSeriouslyIll(data) {
 
     let p4_1 = document.createElement('p')
     p4_1.innerHTML = '<i class="fas fa-circle"></i>'//עיגול
-    p4_1.classList.add('orange')
+    p4_1.classList.add('orangeDot')
     div4.appendChild(p4_1)
     
     let p4_2 = document.createElement('p')
@@ -836,6 +839,7 @@ function loadSeriouslyIll(data) {
 function loadVaccinated(data) {
     let vaccinDose1 = document.querySelector('#vaccinDose1')
     let h1 = document.createElement('h1')
+    h1.classList.add('vaccineNum')
     h1.innerHTML = returnNumberWithComma(data.vaccinatedDose1) 
     vaccinDose1.appendChild(h1)
 
@@ -851,6 +855,7 @@ function loadVaccinated(data) {
     let vaccinDose2 = document.querySelector('#vaccinDose2')
     let h2 = document.createElement('h1')
     h2.innerHTML = returnNumberWithComma(data.vaccinatedDose2) 
+    h2.classList.add('vaccineNum')
     vaccinDose2.appendChild(h2)
 
     let div2 = document.createElement('div')
@@ -897,6 +902,7 @@ if(document.querySelector('.index') !== null){
         loadSection2()
         loadSection3()
         loadSection6()
+        loadSection7()
     }
 }
 
@@ -1089,38 +1095,10 @@ function setNumOfCumulativeVaccinatedGraph(y1Data, y2Data, dates){
           decimalPoint: '.',
           thousandsSep: ','
         },
-        colors: [{
-            linearGradient: {
-              x1: 0,
-              x2: 0,
-              y1: 0,
-              y2: 1
-            },
-            stops: [
-              [0, '#ff3399'],
-              [1, '#3366AA']
-            ]
-          }, {
-            linearGradient: {
-              x1: 0,
-              x2: 0,
-              y1: 0,
-              y2: 1
-            },
-            stops: [
-              [0, '#f03399'],
-              [1, '#bada55']
-            ]
-          }, '#2f8fce', '#C7432B', '#999999', '#DF9239', '#A14A7B'],
     });
     Highcharts.chart('cumulativeNumOfVaccinatedsGraph', {
         chart: {
-            zoomType: 'xy',
-            panning: true,
-            panKey: 'shift',
             type: 'area',
-            backgroundColor: null,
-            backgroundColor: 'transparent'
         },
         credits:{
             enabled: false
@@ -1171,17 +1149,38 @@ function setNumOfCumulativeVaccinatedGraph(y1Data, y2Data, dates){
             },
             categories: dates,
             tickInterval: 5,
+            crosshair: true
         },
         series: [
             {
                 name: 'מתחסנים מנה שניה',
                 data: y1Data,
-                color: '#1c7d7e'
+                color: '#1c7d7e',
+                showInLegend: false,
+                fillColor: 
+                {
+                    linearGradient: { x1: 1, x2: 1, y1: 0, y2: 1 },
+                    stops: 
+                    [
+                        [0, 'rgb(28, 125, 126)'],
+                        [1, 'rgb(28, 125, 126, 0.0)']
+                    ],
+                }
             },
             {
                 name: 'מתחסנים מנה ראשונה',
                 data: y2Data,
                 color: '#b6ca51',
+                showInLegend: false,
+                fillColor: 
+                {
+                    linearGradient: { x1: 1, x2: 1, y1: 0, y2: 1 },
+                    stops: 
+                    [
+                        [0, 'rgb(182, 202, 81)'],
+                        [1, 'rgb(182, 202, 81, 0.0)']
+                    ]
+                }
             },
             
         ],
@@ -1190,35 +1189,29 @@ function setNumOfCumulativeVaccinatedGraph(y1Data, y2Data, dates){
                 stacking: 'overlap',
                 lineWidth: 1
             },
-            area: {
-                // fillColor: {
-                //     linearGradient: { x1: 0, y1: 1, x2: 1, y2: 1},
-                //     stops: [
-                //         [0, '#66a7a8'],
-                //         [1, '#e2eeee'],
-                //     ],
-                // }
-            }
         },
         legend: {
             enabled: false
+        },
+        tooltip: {
+            // formatter(){
+            //     let str = `<strong>יום א' </strong>${this.x}.21`;
+            //     str += `<br><strong>${this.y}</strong> מתחסנים מנה ראשונה`;
+            //     str += `<br><strong>${this.y}</strong> מתחסנים מנה שניה`
+            // },
+            valueDecimals: 2,
+            shared: true,
+            backgroundColor: 'white',
+            borderColor: '#d8d8d9',
+            borderRadius: 8,
+            followPointer: true,
+            useHTML: true,
+            style: {
+                color: '#black',
+                direction: 'rtl',
+                fontFamily: 'OpenSans'
+            }
         }
-        // tooltip: {
-        //     formatter(){
-        //         let s = `<strong>  </strong> ${this.x}`;
-        //         this.points.forEach(function(point){
-        //             s += `<br> Y is: ${point.y}`
-        //         })
-        //     },
-        //     shared: true,
-        //     backgroundColor: '#333333',
-        //     borderColor: 'red',
-        //     borderRadius: 20,
-        //     followPointer: true,
-        //     style: {
-        //         color: '#ffffff'
-        //     }
-        // }
     })
 }
 function addEventListenerToPeriodButtonCumulativeNumOfVaccinated(){
@@ -1312,10 +1305,9 @@ function setPercentVaccinatedGraph(y1Data, y2Data, dates){
                     textAlign: "right",
                     // width: '50px'
                 },
-                labels: {
-                    formatter: function () {
-                        return this.value + '%';
-                    }
+                labels: 
+                {
+                    format: '{value}%'
                 },
             },
             tickInterval: 25,
@@ -1430,6 +1422,10 @@ function setTableVaccination(data) {
         div.classList.add('title')
         containerTitle.appendChild(div)
 
+        if(i === 0){
+            div.classList.add('vaccineCityDiv')
+        }
+
         let button = document.createElement('button')
         button.id = idList[i]
         button.innerHTML = headerList[i]
@@ -1443,6 +1439,7 @@ function setTableVaccination(data) {
         //city
         let div = document.createElement('div')
         div.classList.add('item')
+        div.classList.add('item-title')
         container.appendChild(div)
 
         let h2 = document.createElement('h2')
@@ -1696,4 +1693,114 @@ function addEventListenerToSearchTrafficLightPlan(data) {
             setTableTrafficLightPlan(foundCities)
         }
     })
+}
+function loadSection7() {
+    loadDataForHospitalStatus()
+}
+//table hospital status
+function loadDataForHospitalStatus() {
+    fetch('/hospital-status')
+    .then(response => response.json())
+    .then(data => {
+        setTableHospitalStatus(data)
+    });
+}
+function setTableHospitalStatus(data) {
+    // create header
+    let containerTitle = document.querySelector('#tableHospitalStatusTitle')
+    let headerList = ['בית חולים','% תפוסה כללי','% תפוסה קורונה','אנשי צוות מאומתים ובבידוד']
+    let idList = ['hospitalName', 'occupancyRate', 'occupancyCorona', 'staffInIsolation']
+
+
+    for(let i = 0 ; i < headerList.length ; i++){
+        let div = document.createElement('div')
+        div.classList.add('title')
+        containerTitle.appendChild(div)
+
+        if(i === 0){
+            div.classList.add('firstTitle')
+        }
+
+        let button = document.createElement('button')
+        button.id = idList[i]
+        button.innerHTML = headerList[i]
+        div.appendChild(button)
+    }
+  
+
+    //create table
+    let container = document.querySelector('#tableHospitalStatus')
+    data.forEach((obj) => {
+        //hospital
+        let div = document.createElement('div')
+        div.classList.add('item')
+        div.classList.add('item-title')
+        container.appendChild(div)
+
+        let h2 = document.createElement('h2')
+        h2.innerHTML = obj.hospitalName
+        div.appendChild(h2)
+       
+        //occupancy rate
+        let divOccupancyRateContainer = document.createElement('div')
+        divOccupancyRateContainer.classList.add('divDoseContainer')
+        divOccupancyRateContainer.classList.add('item')
+        container.appendChild(divOccupancyRateContainer)
+
+        let divOccupancyRateProgress = document.createElement('div')
+        divOccupancyRateProgress.classList.add('progress')
+        divOccupancyRateContainer.appendChild(divOccupancyRateProgress)
+
+        let divOccupancyRateProgressLeft = document.createElement('div')
+        divOccupancyRateProgress.appendChild(divOccupancyRateProgressLeft)
+
+        let divOccupancyRateProgressRight = document.createElement('div')
+        divOccupancyRateProgressRight.style.width = obj.occupancy +'%'
+        divOccupancyRateProgressRight.style.height = '10px'
+        divOccupancyRateProgressRight.classList.add('occupancyProgressRight')
+        divOccupancyRateProgress.appendChild(divOccupancyRateProgressRight)
+
+        let divOccupancyPercent = document.createElement('div')
+        divOccupancyRateContainer.appendChild(divOccupancyPercent)
+
+        let pOccupancy = document.createElement('p')
+        pOccupancy.innerHTML = obj.occupancy + '%'
+        divOccupancyPercent.appendChild(pOccupancy)
+
+        //corona occupancy rate
+        let divCoronaOccupancyRateContainer = document.createElement('div')
+        divCoronaOccupancyRateContainer.classList.add('divDoseContainer')
+        divCoronaOccupancyRateContainer.classList.add('item')
+        container.appendChild(divCoronaOccupancyRateContainer)
+
+        let divCoronaOccupancyRateProgress = document.createElement('div')
+        divCoronaOccupancyRateProgress.classList.add('progress')
+        divCoronaOccupancyRateContainer.appendChild(divCoronaOccupancyRateProgress)
+
+        let divCoronaOccupancyRateProgressLeft = document.createElement('div')
+        divCoronaOccupancyRateProgress.appendChild(divCoronaOccupancyRateProgressLeft)
+
+        let divCoronaOccupancyRateProgressRight = document.createElement('div')
+        divCoronaOccupancyRateProgressRight.style.width = obj.coronaOccupancy === -1 ? 0 : obj.coronaOccupancy +'%'
+        divCoronaOccupancyRateProgressRight.style.height = '10px'
+        divCoronaOccupancyRateProgressRight.classList.add('occupancyProgressRight')
+        divCoronaOccupancyRateProgress.appendChild(divCoronaOccupancyRateProgressRight)
+
+        let divCoronaOccupancyPercent = document.createElement('div')
+        divCoronaOccupancyRateContainer.appendChild(divCoronaOccupancyPercent)
+
+        let pCoronaOccupancy = document.createElement('p')
+        pCoronaOccupancy.innerHTML = obj.coronaOccupancy === -1 ? 'אין מידע' : obj.coronaOccupancy +'%'
+        divCoronaOccupancyPercent.appendChild(pCoronaOccupancy)
+
+        //staff in isolation
+        let divStaff = document.createElement('div')
+        divStaff.classList.add('item')
+        container.appendChild(divStaff)
+
+        let pStaff = document.createElement('p')
+        pStaff.innerHTML = obj.staffInIsolation
+        divStaff.appendChild(pStaff)
+    })
+
 }

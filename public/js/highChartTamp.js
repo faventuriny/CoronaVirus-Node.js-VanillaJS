@@ -21,7 +21,6 @@ const chart1 = Highcharts.chart('vaccination-rates-graph-1',
     },
     yAxis:
     {
-        
         title: 
         {
             align: 'high',
@@ -35,7 +34,7 @@ const chart1 = Highcharts.chart('vaccination-rates-graph-1',
         tickInterval: 20,
         labels: 
         {
-            format: '{value}%'
+            format: `${value}%`
         }
     },
 

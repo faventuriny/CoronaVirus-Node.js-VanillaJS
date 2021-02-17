@@ -5,6 +5,7 @@
     --divider-color: #d8d8d9;
     --menu-background-color: #F7F9FC;
     --table-title-color: #E6F1F3;
+    --light-blue: #50cbfd;
     --red: #fa9e8f;
     --orange: #f2c580;
     --yellow: #fcfc70;
@@ -95,7 +96,9 @@ body {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: auto;
 }
-
+.section1 .vaccineNum {
+    font-size: 1.1rem;
+}
 .innerContainer div div.activePatGrid{
     display: grid;
     grid-template-columns: 80px 60px 80px;
@@ -103,10 +106,10 @@ body {
 .fa-circle{
     font-size: 0.6rem;
 }
-.red .fa-circle {
+.redDot .fa-circle {
     color: #FB5377;
 }
-.orange .fa-circle {
+.orangeDot .fa-circle {
     color: #E6B957;
 }
 .innerContainer div div.criticalAndRespiratory{
@@ -124,6 +127,30 @@ body {
     padding-bottom: 8px;
     margin-bottom: 4px;
 }
+.graphIconContainer{
+    display: flex;
+    align-items: center;
+}
+.graphIcon{
+    border: 1px solid hsla(0,0%,59.2%,.22);
+    border-radius: 50px;
+    width: 28px;
+    height: 28px;
+    margin-left: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.section1 .innerContainer div div.innerGraphIcon{
+    width: 20px;
+    height: 20px;
+    margin: 0
+}
+.graphDescription{
+    font-size: 0.95rem;
+    font-weight: 100;
+    margin: 0;
+}
 .section2 {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
@@ -135,9 +162,33 @@ body {
     text-align: center;
     padding: 26px;
 }
+.section2 h2 {
+    font-size: 0.95rem;
+}
 .section2-graphs-container{
     display: flex;
     justify-content: space-between;
+}
+.innerContainerActivePatients,
+.innerContainerSeriouslyIll,
+.innerContainerDeceased,
+.innerContainerTestPercentage{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+#activePatients,
+#seriouslyIll
+{
+    padding: 15px 15px 0 15px;
+}
+
+#activePatientsDistribution,
+#seriouslyIllDistribution{
+    padding: 0 15px 15px 15px;
+}
+#vaccineContainer{
+    padding: 10px 15px 0 15px;
 }
 #dailyNumOfVaccinateds,
 #cumulativeNumOfVaccinateds,
@@ -291,13 +342,18 @@ body {
 #tableVaccinationByCity{
     overflow: hidden;
     overflow-y: scroll;
-    height: 200px;
+    height: 100%;
 }
 #tableVaccinationByCityTitle .title {
     background-color: var(--table-title-color);
     display: flex;
     align-items: center;
+    justify-content: center;
 }
+#tableVaccinationByCityTitle .vaccineCityDiv{
+    justify-content: right;
+}
+
 #tableVaccinationByCityTitle .title button {
     background-color: var(--table-title-color);
     border: none;
@@ -308,9 +364,13 @@ body {
 }
 #tableVaccinationByCity .item {
     border-bottom: 1px solid var(--table-title-color);
-    padding: 10px;
+    padding: 10px 5px;
     display: flex;
     align-items: center;
+    justify-content: center;
+}
+#tableVaccinationByCity .item-title{
+    justify-content: right;
 }
 #tableVaccinationByCity h2 {
     margin: 0;
@@ -420,8 +480,6 @@ body {
     font-family: 'OpenSans';
     font-style: italic;
 }
-
-
 #tableTrafficTitle,
 #tableTraffic{
     display: grid;
@@ -431,7 +489,7 @@ body {
 #tableTraffic{
     overflow: hidden;
     overflow-y: scroll;
-    height: 200px;
+    height: 100%;
 }
 #tableTrafficTitle .title {
     background-color: var(--table-title-color);
@@ -509,20 +567,76 @@ body {
 #tableTraffic .green{
     background-color: var(--green);
 }
-
-
-
-
-
-
-
-
-
 .section7 {
     grid-template-columns: 41.6667% 33.3333% 25%;
 }
 .section7 .container {
     height: 24vw;
+}
+.section7 .innerContainer  {
+    overflow: hidden;
+}
+.section7 .innerContainer div  {
+    padding: 0;
+}
+.section7 .innerContainer .section7-firest-section{
+    padding: 22px 24px;
+}
+.section7 h2{
+    margin: 0;
+}
+#tableHospitalStatusTitle,
+#tableHospitalStatus{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    padding: 0 1px;
+}
+#tableHospitalStatus{
+    overflow: hidden;
+    overflow-y: scroll;
+    height: 100%;
+}
+#tableHospitalStatusTitle .title {
+    background-color: var(--table-title-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#tableHospitalStatusTitle .firstTitle{
+    justify-content: right;
+}
+#tableHospitalStatusTitle .title button {
+    background-color: var(--table-title-color);
+    border: none;
+    font-size: 0.9rem;
+    font-family: 'OpenSans'; 
+    outline: none;
+    cursor: pointer;
+}
+#tableHospitalStatus .item {
+    border-bottom: 1px solid var(--table-title-color);
+    padding: 15px 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#tableHospitalStatus .item-title{
+    justify-content: right;
+}
+#tableHospitalStatus h2 {
+    margin: 0;
+}
+#tableHospitalStatus .divDoseContainer{
+    display: flex;
+}
+#tableHospitalStatus .progress{
+    background-color: var(--background-color);
+    width: 38px;
+    height: 10px;
+    margin-left: 20px;
+}
+#tableHospitalStatus .occupancyProgressRight{
+    background-color: var(--light-blue);
 }
 
 @media only screen and (max-width: 1400px) {
@@ -656,4 +770,5 @@ body {
     } 
 
 }
+
 
