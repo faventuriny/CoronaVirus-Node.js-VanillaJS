@@ -124,3 +124,57 @@ button.accessiblityPressed{
 .all-divs{
     display: flex;
 }
+@media only screen and (max-width: 1257px) {
+    .accessiblity{
+        width: 20%;
+        margin-left: 5%;
+    }
+}
+
+@media only screen and (max-width: 1015px) {
+    .accessiblity{
+        width: 30%;
+    }
+}
+@media only screen and (max-width: 980px){
+    .headerContainer{
+        flex-direction: column;
+    }
+    .logoAndHamburger{
+        justify-content: right;
+        margin-top: 10px;
+    }
+    .updateAndAccessiblity{
+        width: 100%;
+    }
+    .update{
+        text-align: right;
+    }
+    .update h1{
+        font-size: 13px;
+    }
+    .update p{
+        font-size: 10px;
+    }
+    .accessiblity{
+        margin: 0;
+        width: 20%;
+    }
+    .accessiblity button{
+        font-size: 10px;
+    }
+    .rt-menu{
+        top: 129px
+    }
+}
+@media only screen and (max-width: 594px){
+
+    .accessiblity{
+        width: 30%;
+    }
+}
+@media only screen and (max-width: 452px){
+    .rt-menu a {
+        padding: 0;
+    }
+}

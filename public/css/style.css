@@ -290,8 +290,10 @@ body {
 .section3{
     grid-template-columns: 66.6667% 33.3333%;
 }
-.section3 .container{
-    height: 23vw;
+.section3 .container,
+.section6 .container,
+.section7 .container{
+    height: 21.75rem;
 }
 .section3 .innerContainer  {
     overflow: hidden;
@@ -473,9 +475,6 @@ input{
 .section6 {
     grid-template-columns: 66.6667% 33.3333% ;
 }
-.section6 .container {
-    height: 24vw;
-}
 .section6 .innerContainer  {
     overflow: hidden;
 }
@@ -611,9 +610,7 @@ input{
 .section7 {
     grid-template-columns: 41.6667% 33.3333% 25%;
 }
-.section7 .container {
-    height: 24vw;
-}
+
 .section7 .innerContainer  {
     overflow: hidden;
 }
@@ -668,75 +665,27 @@ input{
         grid-template-columns: 1fr 1fr 1fr;
         grid-row: auto;
     }
-    .section3,
-    .section6{
-        display: flex;
-        flex-direction: column;
-    }
+
     .section5{
         grid-template-columns: 1fr 1fr ;
     }
-    .section7 {
+}
+@media only screen and (max-width: 1199px){
+    .section3,
+    .section6,
+    .section7{
         display: flex;
-        flex-wrap: wrap;
     }
-    .section3 .container.rt {
-        width: 66.66667%;
+    .section3 .container.rt,
+    .section6 .container.rt,
+    .section7 .container.lf{
+        width: 100%;
     }
     .section3 .container.lf,
     .section6 .container.lf,
-    .section7 .container.lf,
+    .section7 .container.rt,
     .section7 .container.cr{
-        width: 50%;
-    }
-    .section6 .container.rt{
-        width: 66.6667%;
-    }
-    .section7 .container.rt{
-        width: 41.6667%;
-    }
-}
-@media only screen and (max-width: 1257px) {
-    .accessiblity{
-        width: 20%;
-        margin-left: 5%;
-    }
-}
-
-@media only screen and (max-width: 1015px) {
-    .accessiblity{
-        width: 30%;
-    }
-}
-@media only screen and (max-width: 980px){
-    .headerContainer{
-        flex-direction: column;
-    }
-    .logoAndHamburger{
-        justify-content: right;
-        margin-top: 10px;
-    }
-    .updateAndAccessiblity{
-        width: 100%;
-    }
-    .update{
-        text-align: right;
-    }
-    .update h1{
-        font-size: 13px;
-    }
-    .update p{
-        font-size: 10px;
-    }
-    .accessiblity{
-        margin: 0;
-        width: 20%;
-    }
-    .accessiblity button{
-        font-size: 10px;
-    }
-    .rt-menu{
-        top: 129px
+        display: none;
     }
 }
 @media only screen and (max-width: 991px){
@@ -746,52 +695,32 @@ input{
     .section1 {
         grid-template-columns: 1fr 1fr;
     }
-    .section3,
-    .section4,
-    .section5,
-    .section6,
-    .section7 {
-        display: grid;
-        grid-template-columns: 1fr
+} 
+@media only screen and (max-width: 799px){
+    .section2-graphs-container{
+        flex-direction: column;
     }
-    .section3 .container.rt,
-    .section3 .container.lf,
-    .section6 .container.lf,
-    .section6 .container.rt,
-    .section7 .container.lf,
-    .section7 .container.cr {
-        width: auto;
-    }
-}
-@media only screen and (max-width: 760px){
-    .section7 .container.rt{
-        width: auto
-    }
-    .accessiblity{
-        width: 20%;
-    }
-}
-@media only screen and (max-width: 594px){
+} 
 
-    .accessiblity{
-        width: 30%;
-    }
-}
-@media only screen and (max-width: 452px){
-    .rt-menu a {
-        padding: 0;
-    }
-}
 @media only screen and (max-width: 420px){
     .general{
         padding: .6rem .6rem .5rem;
     }
-    .accessiblity button {
-        padding: 5px 5px
+    .innerContainer div div.activePatGrid{
+        grid-template-columns: 1fr 1fr 1fr
     }
-    .update{
-        padding-left: 0;
-    } 
+    #tableVaccinationByCity .divDoseContainer{
+        flex-direction: column;
+    }
+    .section3 .container, .section6 .container, .section7 .container{
+        height: 23.05rem;
+    }
+    .section6-first-section{
+        flex-direction: column;
+    }
+    .section6 .innerContainer .section6-sec-section{
+        display: none;
+    }
 
 }
 

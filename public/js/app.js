@@ -913,7 +913,7 @@ function loadSection2() {
     loadDataForCumulativeNumOfVaccinate(_28days)
     loadDataForPercentOfVaccinate(_28days)
 }
-// num of vaccinates
+// num of vaccinates graph
 function loadDataForNumOfVaccinate(period){
     fetch('/vaccine-population')
     .then(response => response.json())
@@ -998,6 +998,7 @@ function setNumOfVaccinatedGraph(y1Data, y2Data, dates){
             },
             categories: dates,
             tickInterval: 5,
+            crosshair: true
         },
         series: [
             {
@@ -1024,23 +1025,21 @@ function setNumOfVaccinatedGraph(y1Data, y2Data, dates){
         },
         legend: {
             enabled: false
+        },
+        tooltip: {
+            valueDecimals: 2,
+            shared: true,
+            backgroundColor: 'white',
+            borderColor: '#d8d8d9',
+            borderRadius: 8,
+            followPointer: true,
+            useHTML: true,
+            style: {
+                color: '#black',
+                direction: 'rtl',
+                fontFamily: 'OpenSans'
+            }
         }
-        // tooltip: {
-        //     formatter(){
-        //         let s = `<strong>  </strong> ${this.x}`;
-        //         this.points.forEach(function(point){
-        //             s += `<br> Y is: ${point.y}`
-        //         })
-        //     },
-        //     shared: true,
-        //     backgroundColor: '#333333',
-        //     borderColor: 'red',
-        //     borderRadius: 20,
-        //     followPointer: true,
-        //     style: {
-        //         color: '#ffffff'
-        //     }
-        // }
     })
 }
 function addEventListenerToPeriodButtonNumOfVaccinated(){
@@ -1066,7 +1065,7 @@ function addEventListenerToPeriodButtonNumOfVaccinated(){
     })
 }
 
-// cumulative number of vaccines
+// cumulative number of vaccines graph
 function loadDataForCumulativeNumOfVaccinate(period){
     fetch('/vaccine-population')
     .then(response => response.json())
@@ -1196,11 +1195,6 @@ function setNumOfCumulativeVaccinatedGraph(y1Data, y2Data, dates){
             enabled: false
         },
         tooltip: {
-            // formatter(){
-            //     let str = `<strong>יום א' </strong>${this.x}.21`;
-            //     str += `<br><strong>${this.y}</strong> מתחסנים מנה ראשונה`;
-            //     str += `<br><strong>${this.y}</strong> מתחסנים מנה שניה`
-            // },
             valueDecimals: 2,
             shared: true,
             backgroundColor: 'white',
@@ -1239,7 +1233,7 @@ function addEventListenerToPeriodButtonCumulativeNumOfVaccinated(){
     })
 }
 
-//percent of vaccines
+//percent of vaccines graph
 function loadDataForPercentOfVaccinate(period){
     fetch('/vaccine-population')
     .then(response => response.json())
@@ -1311,6 +1305,11 @@ function setPercentVaccinatedGraph(y1Data, y2Data, dates){
                 {
                     format: '{value}%'
                 },
+                plotLines: [{
+                    value: 0,
+                    width: 2,
+                    color: 'silver'
+                }]
             },
             tickInterval: 25,
             endOnTick: false,
@@ -1327,6 +1326,7 @@ function setPercentVaccinatedGraph(y1Data, y2Data, dates){
             },
             categories: dates,
             tickInterval: 5,
+            crosshair: true
         },
         series: [
             {
@@ -1346,35 +1346,25 @@ function setPercentVaccinatedGraph(y1Data, y2Data, dates){
                 stacking: 'overlap',
                 lineWidth: 1
             },
-            area: {
-                // fillColor: {
-                //     linearGradient: { x1: 0, y1: 1, x2: 1, y2: 1},
-                //     stops: [
-                //         [0, '#66a7a8'],
-                //         [1, '#e2eeee'],
-                //     ],
-                // }
-            }
+
         },
         legend: {
             enabled: false
+        },
+        tooltip: {
+            valueDecimals: 2,
+            shared: true,
+            backgroundColor: 'white',
+            borderColor: '#d8d8d9',
+            borderRadius: 8,
+            followPointer: true,
+            useHTML: true,
+            style: {
+                color: '#black',
+                direction: 'rtl',
+                fontFamily: 'OpenSans'
+            }
         }
-        // tooltip: {
-        //     formatter(){
-        //         let s = `<strong>  </strong> ${this.x}`;
-        //         this.points.forEach(function(point){
-        //             s += `<br> Y is: ${point.y}`
-        //         })
-        //     },
-        //     shared: true,
-        //     backgroundColor: '#333333',
-        //     borderColor: 'red',
-        //     borderRadius: 20,
-        //     followPointer: true,
-        //     style: {
-        //         color: '#ffffff'
-        //     }
-        // }
     })
 }
 function addEventListenerToPeriodButtonPercentOfVaccinated(){
